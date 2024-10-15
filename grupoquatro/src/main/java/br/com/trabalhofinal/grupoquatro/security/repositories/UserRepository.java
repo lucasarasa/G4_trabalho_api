@@ -1,11 +1,11 @@
-package br.com.trabalhofinal.grupoquatro.repositories;
+package br.com.trabalhofinal.grupoquatro.security.repositories;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.loja.entities.User;
+import br.com.trabalhofinal.grupoquatro.security.entities.User;
 
 @Repository("user") 
 public interface UserRepository extends JpaRepository<User, Integer> {
