@@ -31,4 +31,9 @@ public class EnderecoController {
 		enderecoService.deletarEndereco(id);
 	
 	}
+	
+	@GetMapping("/{id}")
+	public EnderecoResponseDTO buscarEndereco(@PathVariable Integer id) {	
+		return enderecoService.buscarEndereco(id);
+	}
 }

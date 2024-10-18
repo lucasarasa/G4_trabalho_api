@@ -1,5 +1,7 @@
 package br.com.trabalhofinal.grupoquatro.security.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +39,21 @@ public class EnderecoService {
 		
 		return endereco;
 	}
+	
+	public EnderecoResponseDTO buscarEndereco(Integer id) {
+			Optional<Endereco> endereco = enderecoRepository.findById(id);
+			EnderecoResponseDTO enderecoResponseDTO = new EnderecoResponseDTO();
+			enderecoResponseDTO.setBairro(endereco.get().getBairro());
+			enderecoResponseDTO.setCep(endereco.get().getCep());
+			enderecoResponseDTO.setLogradouro(endereco.get().getLogradouro());
+			enderecoResponseDTO.setUf(endereco.get().getUf());
+			enderecoResponseDTO.setNumero(endereco.get().getNumero());
+			enderecoResponseDTO.setComplemento(endereco.get().getComplemento());
+			enderecoResponseDTO.setEstado(endereco.get().getEstado());
+			enderecoResponseDTO.setLocalidade(endereco.get().getLocalidade());
+			enderecoResponseDTO.setRegiao(endereco.get().getRegiao());
+			return enderecoResponseDTO;
+		}
 	
 	public void deletarEndereco(Integer id) {
 		enderecoRepository.deleteById(id);
