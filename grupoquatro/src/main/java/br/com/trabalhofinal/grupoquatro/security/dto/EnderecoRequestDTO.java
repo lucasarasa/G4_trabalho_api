@@ -1,8 +1,8 @@
 package br.com.trabalhofinal.grupoquatro.security.dto;
 
 public class EnderecoRequestDTO {
-	private String complemento;
 	private String cep;
+	private String complemento;
 	private Integer numero;	
 		
 	public String getComplemento() {
