@@ -38,4 +38,8 @@ public class EnderecoService {
 		return endereco;
 	}
 	
+	public void deletarEndereco(Integer id) {
+		enderecoRepository.deleteById(id);
+	}
+	
 }
