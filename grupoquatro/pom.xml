@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>br.com.trabalhofinal</groupId>
 	<artifactId>grupoquatro</artifactId>
-	<version>8.0.0-SNAPSHOT</version>
+	<version>9.0.0-SNAPSHOT</version>
 	<name>grupoquatro</name>
 	<description>Projeto final do grupo quatro</description>
 	<url />
@@ -45,11 +45,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
+
+			<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
