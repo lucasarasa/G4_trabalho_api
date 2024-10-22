@@ -1,19 +1,21 @@
 package br.com.trabalhofinal.grupoquatro.security.entities;
 
+import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="categoria")
+@Table(name = "categoria")
 public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="cat_cd_id")
+	@Column(name = "cat_cd_id")
 	private Long id;
 
 	@Column(name = "cat_tx_nome")
@@ -21,6 +23,8 @@ public class Categoria {
 
 	@Column(name = "cat_tx_descricao")
 	private String descricao;
-
-}
 	
+	@OneToMany(mappedBy = "fkCategoria")
+    @Column(unique=true, name="fk_produto")
+    private List<Produto> fkProduto;
+}
