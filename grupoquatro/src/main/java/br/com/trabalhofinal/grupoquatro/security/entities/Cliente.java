@@ -3,6 +3,7 @@ package br.com.trabalhofinal.grupoquatro.security.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,7 +42,8 @@ public class Cliente {
 	@Column(name="fk_pedido")
 	private List<Pedido> fkPedido;
 	
-	@OneToOne(mappedBy = "fkCliente")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(unique = true, name = "fkUser")
 	private User fkUser;
 	
 	public User getFkUser() {

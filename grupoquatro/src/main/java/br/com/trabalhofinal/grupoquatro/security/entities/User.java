@@ -3,7 +3,6 @@ package br.com.trabalhofinal.grupoquatro.security.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -43,16 +42,14 @@ public class User {
 	@Size(max = 120)
 	private String password;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(unique = true, name = "fkCliente")
+	@OneToOne(mappedBy = "fkUser")
 	private Cliente fkCliente;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 	
-	@OneToOne
-	@JoinColumn(unique=true, name = "fkFuncionario")
+	@OneToOne(mappedBy ="fkUser")
 	private Funcionario fkFuncionario;
 	
 	@ManyToOne

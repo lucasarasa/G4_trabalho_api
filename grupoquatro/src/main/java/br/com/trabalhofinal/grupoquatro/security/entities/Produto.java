@@ -44,7 +44,7 @@ public class Produto {
 	private Set<Pedido> pedidos = new HashSet<>();
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(unique = true, name = "fk_produto")
+	@JoinColumn(unique = true, name = "fk_endereco")
 	private Endereco fkEndereco;
 	
 	@ManyToOne

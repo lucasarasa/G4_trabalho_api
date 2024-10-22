@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -41,7 +42,8 @@ public class Funcionario {
 	@JoinTable(name = "func_prod", joinColumns = @JoinColumn(name = "func_id"), inverseJoinColumns = @JoinColumn(name = "prod_id"))
 	private Set<Produto> produtos = new HashSet<>();
 	
-	@OneToOne(mappedBy ="fkFuncionario")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(unique=true, name = "fkUser")
 	private User fkUser;
 	
 	public Funcionario() {

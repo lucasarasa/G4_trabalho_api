@@ -38,7 +38,7 @@ public class SwaggerConfig {
 		
 		Info info = new Info();
 		info.setTitle("Grupo 4");
-		info.setVersion("9.7.1");
+		info.setVersion("9.6.2");
 		info.setDescription("API Grupo 4");
 		info.setContact(contact);
 		info.setLicense(license);
