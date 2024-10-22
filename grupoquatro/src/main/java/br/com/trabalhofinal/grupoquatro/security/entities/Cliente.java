@@ -1,6 +1,7 @@
 package br.com.trabalhofinal.grupoquatro.security.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,21 +37,13 @@ public class Cliente {
 	@Column(name="cli_tx_telefone")
 	private String telefone;
 
-	@OneToMany
-	@JoinColumn(name="fkPedido")
-	private Pedido fkPedido;
+	@OneToMany(mappedBy="fkCliente")
+	@Column(name="fk_pedido")
+	private List<Pedido> fkPedido;
 	
 	@OneToOne(mappedBy = "fkCliente")
 	private User fkUser;
 	
-	public Pedido getFkPedido() {
-		return fkPedido;
-	}
-
-	public void setFkPedido(Pedido fkPedido) {
-		this.fkPedido = fkPedido;
-	}
-
 	public User getFkUser() {
 		return fkUser;
 	}
@@ -105,6 +98,10 @@ public class Cliente {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public void setFkPedido(List<Pedido> fkPedido) {
+		this.fkPedido = fkPedido;
 	}
 	
 }

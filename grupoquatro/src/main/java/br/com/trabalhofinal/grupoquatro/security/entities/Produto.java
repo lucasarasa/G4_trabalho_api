@@ -48,10 +48,82 @@ public class Produto {
 	private Endereco fkEndereco;
 	
 	@ManyToOne
-    @JoinColumn(name="fk_Categoria")
+    @JoinColumn(name="fk_categoria")
     private Categoria fkCategoria;
 	
 	@ManyToOne
 	@JoinColumn(name="fk_aeroporto")
 	private Aeroporto fkAeroporto;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public LocalTime getHorario() {
+		return horario;
+	}
+
+	public void setHorario(LocalTime horario) {
+		this.horario = horario;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	public Endereco getFkEndereco() {
+		return fkEndereco;
+	}
+
+	public void setFkEndereco(Endereco fkEndereco) {
+		this.fkEndereco = fkEndereco;
+	}
+
+	public Categoria getFkCategoria() {
+		return fkCategoria;
+	}
+
+	public void setFkCategoria(Categoria fkCategoria) {
+		this.fkCategoria = fkCategoria;
+	}
+
+	public Aeroporto getFkAeroporto() {
+		return fkAeroporto;
+	}
+
+	public void setFkAeroporto(Aeroporto fkAeroporto) {
+		this.fkAeroporto = fkAeroporto;
+	}	
 }

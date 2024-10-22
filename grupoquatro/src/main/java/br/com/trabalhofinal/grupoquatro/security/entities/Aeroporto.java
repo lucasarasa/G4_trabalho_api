@@ -29,14 +29,64 @@ public class Aeroporto {
 	private String email;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(unique = true, name = "fk_aeroporto")
+	@JoinColumn(unique = true, name = "fk_endereco")
 	private Endereco fkEndereco;
 	
-	@OneToMany(mappedBy = "fk_aeroporto")
+	@OneToMany(mappedBy = "fkAeroporto")
 	@Column(name="aer_fk_produto")
-	private List<Produto> fk_produto;
+	private List<Produto> fkProduto;
 	
-	@OneToMany(mappedBy = "fk_aeroporto")
+	@OneToMany(mappedBy = "fkAeroporto")
 	@Column(name="aer_fk_user")
-	private List<User> fk_user;
+	private List<User> fkUser;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Endereco getFkEndereco() {
+		return fkEndereco;
+	}
+
+	public void setFkEndereco(Endereco fkEndereco) {
+		this.fkEndereco = fkEndereco;
+	}
+
+	public List<Produto> getFkProduto() {
+		return fkProduto;
+	}
+
+	public void setFkProduto(List<Produto> fkProduto) {
+		this.fkProduto = fkProduto;
+	}
+
+	public List<User> getFkUser() {
+		return fkUser;
+	}
+
+	public void setFkUser(List<User> fkUser) {
+		this.fkUser = fkUser;
+	}
+
+	
 }

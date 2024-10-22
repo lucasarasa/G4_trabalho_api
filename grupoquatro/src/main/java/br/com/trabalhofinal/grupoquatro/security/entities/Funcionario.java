@@ -114,6 +114,22 @@ public class Funcionario {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
+
+	public Set<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(Set<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+	public User getFkUser() {
+		return fkUser;
+	}
+
+	public void setFkUser(User fkUser) {
+		this.fkUser = fkUser;
+	}
     
 
 }
