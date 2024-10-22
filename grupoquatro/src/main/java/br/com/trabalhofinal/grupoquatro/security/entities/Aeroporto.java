@@ -32,11 +32,11 @@ public class Aeroporto {
 	@JoinColumn(unique = true, name = "fk_aeroporto")
 	private Endereco fkEndereco;
 	
-//	@OneToMany(mappedBy = "fk_aeroporto")
-//	@Column(name="aer_fk_produto")
-//	private List<Produto> fk_produto;
-//	
-//	@OneToMany(mappedBy = "fk_aeroporto")
-//	@Column(name="aer_fk_user")
-//	private List<User> fk_user;
+	@OneToMany(mappedBy = "fk_aeroporto")
+	@Column(name="aer_fk_produto")
+	private List<Produto> fk_produto;
+	
+	@OneToMany(mappedBy = "fk_aeroporto")
+	@Column(name="aer_fk_user")
+	private List<User> fk_user;
 }

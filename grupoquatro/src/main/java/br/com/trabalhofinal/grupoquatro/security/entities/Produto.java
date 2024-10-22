@@ -50,4 +50,8 @@ public class Produto {
 	@ManyToOne
     @JoinColumn(name="fk_Categoria")
     private Categoria fkCategoria;
+	
+	@ManyToOne
+	@JoinColumn(name="fk_aeroporto")
+	private Aeroporto fkAeroporto;
 }
