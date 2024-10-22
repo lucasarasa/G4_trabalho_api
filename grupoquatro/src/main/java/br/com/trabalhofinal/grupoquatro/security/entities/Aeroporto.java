@@ -14,31 +14,44 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="aeroporto")
+@Table(name = "aeroporto")
 public class Aeroporto {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="aer_cd_int")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "aer_cd_int")
 	private Integer id;
-	
-	@Column(name="are_tx_nome")
+
+	@Column(name = "are_tx_nome")
 	private String nome;
-	
-	@Column(name="are_tx_email")
+
+	@Column(name = "are_tx_email")
 	private String email;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true, name = "fk_endereco")
 	private Endereco fkEndereco;
-	
+
 	@OneToMany(mappedBy = "fkAeroporto")
-	@Column(name="aer_fk_produto")
+	@Column(name = "aer_fk_produto")
 	private List<Produto> fkProduto;
-	
+
 	@OneToMany(mappedBy = "fkAeroporto")
-	@Column(name="aer_fk_user")
+	@Column(name = "aer_fk_user")
 	private List<User> fkUser;
+
+	public Aeroporto() {
+	}
+
+	public Aeroporto(Integer id, String nome, String email, Endereco fkEndereco, List<Produto> fkProduto,
+			List<User> fkUser) {
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.fkEndereco = fkEndereco;
+		this.fkProduto = fkProduto;
+		this.fkUser = fkUser;
+	}
 
 	public Integer getId() {
 		return id;
@@ -88,5 +101,10 @@ public class Aeroporto {
 		this.fkUser = fkUser;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "Aeroporto [id=" + id + ", nome=" + nome + ", email=" + email + ", fkEndereco=" + fkEndereco
+				+ ", fkProduto=" + fkProduto + ", fkUser=" + fkUser + "]";
+	}
+
 }
