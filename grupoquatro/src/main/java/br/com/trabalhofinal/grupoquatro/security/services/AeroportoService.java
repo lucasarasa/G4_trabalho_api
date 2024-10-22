@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import br.com.trabalhofinal.grupoquatro.security.dto.AeroportoRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.entities.Aeroporto;
-import br.com.trabalhofinal.grupoquatro.security.entities.Endereco;
 import br.com.trabalhofinal.grupoquatro.security.repositories.AeroportoRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.EnderecoRepository;
 
@@ -37,8 +37,12 @@ public class AeroportoService {
 	
 	public void atualizarAeroporto(AeroportoRequestDTO aeroportoRequestDTO) {
 		Aeroporto aeroporto = aeroportoRepository.buscarAeroporto();
-		aeroporto.setNome(aeroportoRequestDTO.getNome());
-		aeroporto.setEmail(aeroportoRequestDTO.getEmail());
+		if(aeroportoRequestDTO.getNome()!=null) {
+			aeroporto.setNome(aeroportoRequestDTO.getNome());
+		}
+		if(aeroportoRequestDTO.getEmail()!=null) {
+			aeroporto.setEmail(aeroportoRequestDTO.getEmail());			
+		}
 		
 		aeroportoRepository.save(aeroporto);
 	}
