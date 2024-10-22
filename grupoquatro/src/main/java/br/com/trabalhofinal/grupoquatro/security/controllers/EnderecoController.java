@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,14 +35,23 @@ public class EnderecoController {
 		return enderecoService.buscarTodos();
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deletarEndereco(@PathVariable Integer id) {
-		enderecoService.deletarEndereco(id);
-	
-	}
-	
 	@GetMapping("/{id}")
+	@Operation(summary = "Buscar um endereço pelo ID")
 	public EnderecoResponseDTO buscarEndereco(@PathVariable Integer id) {	
 		return enderecoService.buscarEndereco(id);
 	}
+	
+	@PutMapping("/{id}")
+	@Operation(summary = "Atualizar um endereço")
+	public String atualizarEndereco(@PathVariable Integer id,@RequestBody EnderecoRequestDTO enderecoDTO) {
+		return enderecoService.atualizarEndereco(id, enderecoDTO);
+	}
+
+	@DeleteMapping("/{id}")
+	@Operation(summary = "Deletar um endereço pelo ID")
+	public String deletarEndereco(@PathVariable Integer id) {
+		enderecoService.deletarEndereco(id);
+		return "Endereço deletado com sucesso!";
+	}
+	
 }
