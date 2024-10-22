@@ -40,11 +40,7 @@ public class WebSecurityConfig {
 				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/g6/**", "/auth/**", "/h2-console/**", "/roles/**", "/test/all/**",
-<<<<<<< Updated upstream
-								"/swagger-ui/**", "/v3/api-docs/**", "/actuator/**", "/endereco/**")
-=======
 								"/swagger-ui/**", "/v3/api-docs/**", "/actuator/**", "/endereco/**", "/cliente/**", "/funcionario/**")
->>>>>>> Stashed changes
 						.permitAll().requestMatchers("/test/user/**").hasAnyRole("USER", "ADMIN")
 						.requestMatchers("/test/admin/**").hasRole("ADMIN").anyRequest().authenticated());
 
