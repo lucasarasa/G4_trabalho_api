@@ -46,6 +46,17 @@ public class Cliente {
 	@JoinColumn(unique = true, name = "fkUser")
 	private User fkUser;
 	
+	public Cliente() {
+	}
+	
+	public Cliente(String nome, String cpf, String cartao, LocalDate dataNascimento, String telefone) {
+		this.nome = nome; 
+		this.cpf = cpf; 
+		this.cartao = cartao; 
+		this.dataNascimento = dataNascimento; 
+		this.telefone = telefone;
+	}
+	
 	public User getFkUser() {
 		return fkUser;
 	}
