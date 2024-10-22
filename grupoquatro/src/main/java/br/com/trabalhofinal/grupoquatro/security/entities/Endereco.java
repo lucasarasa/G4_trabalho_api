@@ -1,5 +1,6 @@
 package br.com.trabalhofinal.grupoquatro.security.entities;
 
+import br.com.trabalhofinal.grupoquatro.security.dto.EnderecoResponseDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -112,26 +113,25 @@ public class Endereco {
 		
 		public Endereco() {
 		}
-		public Endereco(Integer id, String cep, String bairro, String complemento, String estado, String logradouro,
-				String localidade, String uf) {
-			this.id = id;
+		
+		public Endereco(String cep, String regiao, String bairro, String complemento, String estado, String logradouro,
+				String localidade, String uf, Integer numero) {
+			super();
 			this.cep = cep;
+			this.regiao = regiao;
 			this.bairro = bairro;
 			this.complemento = complemento;
 			this.estado = estado;
 			this.logradouro = logradouro;
 			this.localidade = localidade;
 			this.uf = uf;
-		}	
-		public Endereco(String bairro, String cep, String complemento, String estado, String localidade,
-				String logradouro, Integer numero, String regiao, String uf) {
-			this.cep = cep;
-			this.bairro = bairro;
-			this.complemento = complemento;
-			this.estado = estado;
-			this.logradouro = logradouro;
-			this.localidade = localidade;
-			this.uf = uf;
+			this.numero = numero;
+		}
+		
+		public EnderecoResponseDTO toResponseDTO() {
+			return new EnderecoResponseDTO(this.cep,
+					this.logradouro, this.complemento, this.bairro, this.localidade,
+					this.uf, this.estado, this.regiao, this.numero);
 		}
 	
 }

@@ -1,5 +1,7 @@
 package br.com.trabalhofinal.grupoquatro.security.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.EnderecoRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.EnderecoResponseDTO;
-import br.com.trabalhofinal.grupoquatro.security.repositories.EnderecoRepository;
 import br.com.trabalhofinal.grupoquatro.security.services.EnderecoService;
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/endereco")
@@ -24,6 +26,12 @@ public class EnderecoController {
 	@PostMapping("/CadastrarEndereço")
 	public EnderecoResponseDTO cadastrarEndereco(@RequestBody EnderecoRequestDTO enderecoRequestDTO) {
 		return enderecoService.cadastrarEndereco(enderecoRequestDTO);
+	}
+	
+	@GetMapping("/buscar-todos")
+	@Operation(summary = "Buscar todos os endereços cadastrados")
+	public List<EnderecoResponseDTO> buscarTodos() {
+		return enderecoService.buscarTodos();
 	}
 	
 	@DeleteMapping("/{id}")

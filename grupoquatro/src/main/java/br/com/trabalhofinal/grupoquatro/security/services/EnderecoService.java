@@ -1,5 +1,7 @@
 package br.com.trabalhofinal.grupoquatro.security.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,16 @@ public class EnderecoService {
 		enderecoRepository.save(enderecoConvertido);
 		
 		return endereco;
+	}
+	
+	public List<EnderecoResponseDTO> buscarTodos() {
+		List<Endereco> enderecos = enderecoRepository.findAll();
+		List<EnderecoResponseDTO> enderecosDTO = new ArrayList<EnderecoResponseDTO>();
+		for (Endereco end : enderecos) {
+			enderecosDTO.add(end.toResponseDTO());
+		}
+
+		return enderecosDTO;
 	}
 	
 	public EnderecoResponseDTO buscarEndereco(Integer id) {
