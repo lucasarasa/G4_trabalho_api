@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,6 +35,12 @@ public class Endereco {
 		private String uf;
 		@Column(name="numero")
 		private Integer numero;	
+		
+		@OneToOne(mappedBy = "fkEndereco")
+		private Aeroporto fkAeroporto;
+		
+		@OneToOne(mappedBy = "fkEndereco")
+		private Produto fkProduto;
 		
 		public Integer getId() {
 			return id;

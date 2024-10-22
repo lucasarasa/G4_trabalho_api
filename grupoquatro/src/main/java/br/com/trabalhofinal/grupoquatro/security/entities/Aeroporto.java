@@ -2,6 +2,7 @@ package br.com.trabalhofinal.grupoquatro.security.entities;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,10 +28,10 @@ public class Aeroporto {
 	@Column(name="are_tx_email")
 	private String email;
 	
-//	@OneToOne
-//	@JoinColumn(unique = true, name = "fk_aeroporto")
-//	private Endereco fkEndereco;
-//	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(unique = true, name = "fk_aeroporto")
+	private Endereco fkEndereco;
+	
 //	@OneToMany(mappedBy = "fk_aeroporto")
 //	@Column(name="aer_fk_produto")
 //	private List<Produto> fk_produto;
