@@ -43,7 +43,7 @@ public class EnderecoController {
 	
 	@PutMapping("/{id}")
 	@Operation(summary = "Atualizar um endereço")
-	public String atualizarEndereco(@PathVariable Integer id,@RequestBody EnderecoRequestDTO enderecoDTO) {
+	public String atualizarEndereco(@PathVariable Integer id,@RequestBody EnderecoResponseDTO enderecoDTO) {
 		return enderecoService.atualizarEndereco(id, enderecoDTO);
 	}
 

@@ -66,25 +66,34 @@ public class EnderecoService {
 		return enderecoResponseDTO;
 	}
 
-	public String atualizarEndereco(Integer id, EnderecoRequestDTO enderecoRequest) {
+	public String atualizarEndereco(Integer id, EnderecoResponseDTO enderecoDTO) {
 		if (!enderecoRepository.existsById(id)) {
 			return "Endereço não existe!";
 		}
 		Endereco endereco = enderecoRepository.findById(id).get();
-
-		EnderecoResponseDTO viaCep = util.buscarEndereco(enderecoRequest.getCep());
-
-		if (enderecoRequest.getCep() != null) {
-			endereco.setCep(viaCep.getCep());
-			endereco.setBairro(viaCep.getBairro());
-			endereco.setEstado(viaCep.getEstado());
-			endereco.setLogradouro(viaCep.getLogradouro());
-			endereco.setLocalidade(viaCep.getLocalidade());
-			endereco.setUf(viaCep.getUf());
-			endereco.setRegiao(viaCep.getRegiao());
+		if (enderecoDTO.getCep() != null) {
+			endereco.setCep(enderecoDTO.getCep());
 		}
-		if (enderecoRequest.getComplemento() != null) {
-			endereco.setComplemento(enderecoRequest.getComplemento());
+		if (enderecoDTO.getLogradouro() != null) {
+			endereco.setLogradouro(enderecoDTO.getLogradouro());
+		}
+		if (enderecoDTO.getBairro() != null) {
+			endereco.setBairro(enderecoDTO.getBairro());
+		}
+		if (enderecoDTO.getLocalidade() != null) {
+			endereco.setLocalidade(enderecoDTO.getLocalidade());
+		}
+		if (enderecoDTO.getEstado() != null) {
+			endereco.setEstado(enderecoDTO.getEstado());
+		}
+		if (enderecoDTO.getUf() != null) {
+			endereco.setUf(enderecoDTO.getUf());
+		}
+		if (enderecoDTO.getRegiao() != null) {
+			endereco.setRegiao(enderecoDTO.getRegiao());
+		}
+		if (enderecoDTO.getComplemento() != null) {
+			endereco.setComplemento(enderecoDTO.getComplemento());
 		}	
 		enderecoRepository.save(endereco);
 
