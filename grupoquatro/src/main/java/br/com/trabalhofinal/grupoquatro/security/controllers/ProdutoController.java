@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,9 +46,16 @@ public class ProdutoController {
 	}
 	
 	@PutMapping("/{id}")
-	@Operation(summary = "Atualizar um estudante")
+	@Operation(summary = "Atualizar um produto")
 	public ResponseEntity<?> atualizarProduto(@PathVariable Integer id, @RequestBody ProdutoRequestUpdateDTO produto) {
 		return produtoService.atualizarProduto(id, produto);
+	}
+	
+	@DeleteMapping("/{id}")
+	@Operation(summary = "Deletar um produto pelo ID")
+	public String deletarProduto(@PathVariable Integer id) {
+		produtoService.deletarProduto(id);
+		return "Produto deletado com sucesso!";
 	}
 
 

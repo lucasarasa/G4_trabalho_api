@@ -85,6 +85,17 @@ public class ProdutoService {
 		}
 
 	}
+	
+	public ResponseEntity<?> deletarProduto(Integer id) {
+		Optional<Produto> produto = produtoRepository.findById(id);
+
+		if (produto.isPresent()) {
+			produtoRepository.deleteById(produto.get().getId());
+			return ResponseEntity.ok("Produto deletado com sucesso!");
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
 	
 
