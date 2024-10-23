@@ -39,7 +39,7 @@ public class ClienteService {
 		cliente.setDataNascimento(clienteDto.getDataNascimento());
 		cliente.setTelefone(clienteDto.getTelefone());
 		
-		User usuario = new User(clienteDto.getEmail(), encoder.encode(clienteDto.getSenha()), clienteDto.getUserName());
+		User usuario = new User(clienteDto.getUsername(), clienteDto.getEmail(), encoder.encode(clienteDto.getPassword()));
 		
 		userRepository.save(usuario);
 		Cliente clienteConvert = cliente.toCliente();
