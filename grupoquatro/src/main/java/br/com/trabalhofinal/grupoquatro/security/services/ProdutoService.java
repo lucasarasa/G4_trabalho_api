@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.MessageResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoRequestDTO;
+import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoRequestUpdateDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.entities.Endereco;
 import br.com.trabalhofinal.grupoquatro.security.entities.Produto;
@@ -65,6 +66,24 @@ public class ProdutoService {
 		produtoResponseDTO.setDestino(produto.get().getFkEndereco().getLocalidade());
 		produtoResponseDTO.setPreco(produto.get().getPreco());
 		return produtoResponseDTO;
+	}
+	
+	public ResponseEntity<?> atualizarProduto(Integer id, ProdutoRequestUpdateDTO produtoDTO) {
+		if (!produtoRepository.existsById(id)) {
+			return ResponseEntity.notFound().build();
+		} else {
+			Produto produto = produtoRepository.findById(id).get();
+			if (produtoDTO.getDescricao() != null) {
+				produto.setDescricao(produtoDTO.getDescricao());
+			}
+			if (produtoDTO.getPreco() != null) {
+				produto.setPreco(produtoDTO.getPreco());
+			}
+		
+			produtoRepository.save(produto);
+			return ResponseEntity.ok().build();
+		}
+
 	}
 
 	
