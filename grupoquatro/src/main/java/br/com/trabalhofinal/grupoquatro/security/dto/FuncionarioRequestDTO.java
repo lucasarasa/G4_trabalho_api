@@ -1,30 +1,34 @@
 package br.com.trabalhofinal.grupoquatro.security.dto;
 
-import java.time.LocalDate;
+import java.util.Set;
 
 
-public class FuncionarioDTO {
+public class FuncionarioRequestDTO {
 	
 	private String nome;
 	private String cpf;
     private String telefone;
-    private LocalDate dataNascimento;
     private String email;
 	private String cargo;
-	
-	public FuncionarioDTO() {
+	private String username;
+	private String password;
+    private Set<String> role;
+    
+	public FuncionarioRequestDTO() {
 	}
 
-	public FuncionarioDTO(String nome, String cpf, String telefone, LocalDate dataNascimento, String email,
-			String cargo) {
-		super();
+	public FuncionarioRequestDTO(String nome, String cpf, String telefone, String email,
+			String cargo, String username, String password, Set<String> role) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
-		this.dataNascimento = dataNascimento;
 		this.email = email;
 		this.cargo = cargo;
+		this.username = username;
+		this.password = password;
+		this.role = role;
 	}
+	
 
 	public String getNome() {
 		return nome;
@@ -50,13 +54,6 @@ public class FuncionarioDTO {
 		this.telefone = telefone;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
 
 	public String getEmail() {
 		return email;
@@ -73,5 +70,30 @@ public class FuncionarioDTO {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Set<String> getRole() {
+		return role;
+	}
+
+	public void setRole(Set<String> role) {
+		this.role = role;
+	}
+    
 
 }
