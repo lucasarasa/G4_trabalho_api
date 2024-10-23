@@ -1,12 +1,16 @@
 package br.com.trabalhofinal.grupoquatro.security.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoRequestDTO;
+import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.services.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -22,6 +26,12 @@ public class ProdutoController {
 	public String cadastrarProduto(@RequestBody ProdutoRequestDTO produtoDTO) {
 		produtoService.cadastrarProduto(produtoDTO);
 		return "Produto cadastrado com sucesso!";
+	}
+	
+	@GetMapping("/buscar-todos")
+	@Operation(summary = "Buscar todos os produtos cadastrados")
+	public List<ProdutoResponseDTO> buscarTodos() {
+		return produtoService.buscarTodos();
 	}
 
 }

@@ -3,6 +3,7 @@ package br.com.trabalhofinal.grupoquatro.security.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoResponseDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -111,6 +112,10 @@ public class Produto {
 
 	public void setFkCategoria(Categoria fkCategoria) {
 		this.fkCategoria = fkCategoria;
+	}
+	
+	public ProdutoResponseDTO toResponseDTO() {
+		return new ProdutoResponseDTO(this.nome, this.descricao, this.fkEndereco.getLocalidade(), this.preco);
 	}
 	
 }

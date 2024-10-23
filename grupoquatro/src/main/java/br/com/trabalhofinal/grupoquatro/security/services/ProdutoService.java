@@ -1,11 +1,15 @@
 package br.com.trabalhofinal.grupoquatro.security.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.MessageResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoRequestDTO;
+import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.entities.Endereco;
 import br.com.trabalhofinal.grupoquatro.security.entities.Produto;
 import br.com.trabalhofinal.grupoquatro.security.repositories.CategoriaRepository;
@@ -38,6 +42,16 @@ public class ProdutoService {
 		produtoRepository.save(produto);
 		
 		return ResponseEntity.ok(new MessageResponseDTO("Produto registrado com sucesso!"));
+	}
+	
+	public List<ProdutoResponseDTO> buscarTodos() {
+		List<Produto> produtos = produtoRepository.findAll();
+		List<ProdutoResponseDTO> produtosDTO = new ArrayList<ProdutoResponseDTO>();
+		for (Produto prod : produtos) {
+			produtosDTO.add(prod.toResponseDTO());
+		}
+
+		return produtosDTO;
 	}
 	
 
