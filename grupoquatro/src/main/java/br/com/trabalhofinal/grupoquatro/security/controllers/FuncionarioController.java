@@ -46,6 +46,16 @@ public class FuncionarioController {
 	public List<FuncionarioResponseIdDTO> listarFuncionario() {
 		return funcionarioService.buscarTodos();
 	}
-
+	
+	@DeleteMapping("/{id}")
+	@Operation(summary = "Deletar um funcionário pelo ID")
+    public ResponseEntity<String> deletarId(@PathVariable Integer id) {
+        boolean resultDelete = funcionarioService.funcionarioDelete(id);
+        if(resultDelete) {
+            return ResponseEntity.status(HttpStatus.OK).body("Objeto deletado com sucesso!");
+        }else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Objeto não deletado!");
+        }
+    }
 
 }

@@ -123,5 +123,14 @@ public class FuncionarioService {
 				funcionario.getFkUser().getUsername(),
 				funcionario.getFkUser().getRoles())).collect(Collectors.toList());
 	}
+	
+	public boolean funcionarioDelete(Integer id) {
+        if(funcionarioRepository.existsById(id)) {
+            funcionarioRepository.deleteById(id);
+            return true;
+        }else {
+            return false;
+        }
+    }
 
 }
