@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,12 @@ public class ProdutoController {
 	@Operation(summary = "Buscar todos os produtos cadastrados")
 	public List<ProdutoResponseDTO> buscarTodos() {
 		return produtoService.buscarTodos();
+	}
+	
+	@GetMapping("/{id}")
+	@Operation(summary = "Buscar um produto pelo ID")
+	public ProdutoResponseDTO buscarProduto(@PathVariable Integer id) {	
+		return produtoService.buscarProduto(id);
 	}
 
 }

@@ -2,6 +2,7 @@ package br.com.trabalhofinal.grupoquatro.security.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +54,19 @@ public class ProdutoService {
 
 		return produtosDTO;
 	}
+	
+	public ProdutoResponseDTO buscarProduto(Integer id) {
+		
+		Optional<Produto> produto = produtoRepository.findById(id);
+		
+		ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO();
+		produtoResponseDTO.setNome(produto.get().getNome());
+		produtoResponseDTO.setDescricao(produto.get().getDescricao());
+		produtoResponseDTO.setDestino(produto.get().getFkEndereco().getLocalidade());
+		produtoResponseDTO.setPreco(produto.get().getPreco());
+		return produtoResponseDTO;
+	}
+
 	
 
 }
