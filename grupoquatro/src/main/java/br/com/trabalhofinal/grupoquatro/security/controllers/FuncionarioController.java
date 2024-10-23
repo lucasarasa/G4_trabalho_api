@@ -33,6 +33,13 @@ public class FuncionarioController {
 	public FuncionarioResponseDTO cadastrarFuncionario(@RequestBody FuncionarioRequestDTO funcionario) {
 		return funcionarioService.cadastrarFuncionario(funcionario);
 	}
+	
+	@PutMapping("/{id}")
+	@Operation(summary = "Atualizar um funcionário existente")
+	public ResponseEntity<FuncionarioResponseDTO> atualizarFuncionario(@PathVariable Integer id,@RequestBody FuncionarioRequestUpdateDTO funcionarioDTO) {
+		FuncionarioResponseDTO funcionarioAtualizado = funcionarioService.atualizarFuncionario(id, funcionarioDTO);
+		return ResponseEntity.ok(funcionarioAtualizado);
+	}
 
 
 }

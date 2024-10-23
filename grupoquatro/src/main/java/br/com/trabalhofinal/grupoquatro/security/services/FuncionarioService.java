@@ -86,5 +86,30 @@ public class FuncionarioService {
 		
 		
 	}
+	
+	public FuncionarioResponseDTO atualizarFuncionario(Integer id, FuncionarioRequestUpdateDTO funcionarioDTO) {
+	    Funcionario funcionarioOptional = funcionarioRepository.findById(id).orElse(null);
+	    if(funcionarioDTO.getTelefone() != null) {
+	    funcionarioOptional.setTelefone(funcionarioDTO.getTelefone());
+	    }
+	    if(funcionarioDTO.getEmail() != null) {
+	    funcionarioOptional.getFkUser().setEmail(funcionarioDTO.getEmail());
+	    }
+	    if(funcionarioDTO.getCargo() != null) {
+	    funcionarioOptional.setCargo(funcionarioDTO.getCargo());
+	    }
+	    if(funcionarioDTO.getUsername() != null) {
+	    funcionarioOptional.getFkUser().setUsername(funcionarioDTO.getUsername());
+	    }
+	    if(funcionarioDTO.getPassword() != null) {
+	    funcionarioOptional.getFkUser().setPassword(funcionarioDTO.getPassword());
+	    }
+	    
+	    funcionarioRepository.save(funcionarioOptional);
+	    FuncionarioResponseDTO requestDTO = new FuncionarioResponseDTO(funcionarioOptional);
+
+	    return requestDTO;
+
+	}
 
 }
