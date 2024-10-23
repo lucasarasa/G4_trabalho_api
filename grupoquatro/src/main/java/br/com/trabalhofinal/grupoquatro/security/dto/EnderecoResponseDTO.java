@@ -4,31 +4,29 @@ import br.com.trabalhofinal.grupoquatro.security.entities.Endereco;
 
 public class EnderecoResponseDTO {
 	private String cep;
-	private String bairro;
-	private String complemento;
-	private String estado;
 	private String logradouro;
+	private String bairro;
 	private String localidade;
 	private String uf;
+	private String estado;
 	private String regiao;
-	private Integer numero;
+	private String complemento;
 
 	public EnderecoResponseDTO() {
 
 	}
 
-	public EnderecoResponseDTO(String cep, String logradouro, String complemento, String bairro, String localidade,
-			String uf, String estado, String regiao, Integer numero) {
+	public EnderecoResponseDTO(String cep, String logradouro, String bairro, String localidade, String uf,
+			String estado, String regiao, String complemento) {
+		super();
 		this.cep = cep;
-		this.bairro = bairro;
-		this.complemento = complemento;
-		this.estado = estado;
 		this.logradouro = logradouro;
+		this.bairro = bairro;
 		this.localidade = localidade;
 		this.uf = uf;
+		this.estado = estado;
 		this.regiao = regiao;
-		this.numero = numero;
-
+		this.complemento = complemento;
 	}
 
 	public String getCep() {
@@ -87,14 +85,6 @@ public class EnderecoResponseDTO {
 		this.regiao = regiao;
 	}
 
-	public Integer getNumero() {
-		return numero;
-	}
-
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
-
 	public String getLocalidade() {
 		return localidade;
 	}
@@ -104,7 +94,6 @@ public class EnderecoResponseDTO {
 	}
 
 	public Endereco toEndereco() {
-		return new Endereco(this.cep, this.bairro, this.complemento, this.estado, this.logradouro, this.localidade,
-				this.uf, this.regiao, this.numero);
+		return new Endereco(this.cep, this.logradouro, this.bairro, this.localidade, this.uf, this.estado, this.regiao, this.complemento);
 	}
 }

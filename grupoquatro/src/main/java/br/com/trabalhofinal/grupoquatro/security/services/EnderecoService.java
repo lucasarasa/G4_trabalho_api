@@ -28,14 +28,13 @@ public class EnderecoService {
 
 		EnderecoResponseDTO endereco = new EnderecoResponseDTO();
 		endereco.setCep(viaCep.getCep());
-		endereco.setBairro(viaCep.getBairro());
-		endereco.setComplemento(enderecoRequestDTO.getComplemento());
-		endereco.setEstado(viaCep.getEstado());
 		endereco.setLogradouro(viaCep.getLogradouro());
+		endereco.setBairro(viaCep.getBairro());
 		endereco.setLocalidade(viaCep.getLocalidade());
 		endereco.setUf(viaCep.getUf());
+		endereco.setEstado(viaCep.getEstado());
 		endereco.setRegiao(viaCep.getRegiao());
-		endereco.setNumero(enderecoRequestDTO.getNumero());
+		endereco.setComplemento(enderecoRequestDTO.getComplemento());
 
 		Endereco enderecoConvertido = endereco.toEndereco();
 		enderecoRepository.save(enderecoConvertido);
@@ -56,15 +55,14 @@ public class EnderecoService {
 	public EnderecoResponseDTO buscarEndereco(Integer id) {
 		Optional<Endereco> endereco = enderecoRepository.findById(id);
 		EnderecoResponseDTO enderecoResponseDTO = new EnderecoResponseDTO();
-		enderecoResponseDTO.setBairro(endereco.get().getBairro());
 		enderecoResponseDTO.setCep(endereco.get().getCep());
 		enderecoResponseDTO.setLogradouro(endereco.get().getLogradouro());
-		enderecoResponseDTO.setUf(endereco.get().getUf());
-		enderecoResponseDTO.setNumero(endereco.get().getNumero());
-		enderecoResponseDTO.setComplemento(endereco.get().getComplemento());
-		enderecoResponseDTO.setEstado(endereco.get().getEstado());
+		enderecoResponseDTO.setBairro(endereco.get().getBairro());
 		enderecoResponseDTO.setLocalidade(endereco.get().getLocalidade());
+		enderecoResponseDTO.setUf(endereco.get().getUf());
+		enderecoResponseDTO.setEstado(endereco.get().getEstado());
 		enderecoResponseDTO.setRegiao(endereco.get().getRegiao());
+		enderecoResponseDTO.setComplemento(endereco.get().getComplemento());
 		return enderecoResponseDTO;
 	}
 
@@ -87,11 +85,7 @@ public class EnderecoService {
 		}
 		if (enderecoRequest.getComplemento() != null) {
 			endereco.setComplemento(enderecoRequest.getComplemento());
-		}
-		if (enderecoRequest.getNumero() != null) {
-			endereco.setNumero(enderecoRequest.getNumero());
-		}
-		
+		}	
 		enderecoRepository.save(endereco);
 
 		return "Endereço atualizado com sucesso!";

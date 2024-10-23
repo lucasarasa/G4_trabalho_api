@@ -20,22 +20,20 @@ public class Endereco {
 		
 		@Column(name="cep")
 		private String cep;	
-		@Column(name="regiao")
-		private String regiao;
-		@Column(name="bairro")
-		private String bairro;
-		@Column(name="complemento")
-		private String complemento;
-		@Column(name="estado")
-		private String estado;
 		@Column(name="logradouro")
 		private String logradouro;
+		@Column(name="bairro")
+		private String bairro;
 		@Column(name="localidade")
 		private String localidade;
 		@Column(name="uf")
 		private String uf;
-		@Column(name="numero")
-		private Integer numero;	
+		@Column(name="estado")
+		private String estado;
+		@Column(name="regiao")
+		private String regiao;
+		@Column(name="complemento")
+		private String complemento;	
 		
 		@OneToOne(mappedBy = "fkEndereco")
 		private Aeroporto fkAeroporto;
@@ -66,12 +64,6 @@ public class Endereco {
 		}
 		public void setBairro(String bairro) {
 			this.bairro = bairro;
-		}
-		public Integer getNumero() {
-			return numero;
-		}
-		public void setNumero(Integer numero) {
-			this.numero = numero;
 		}
 		public String getComplemento() {
 			return complemento;
@@ -114,24 +106,22 @@ public class Endereco {
 		public Endereco() {
 		}
 		
-		public Endereco(String cep, String regiao, String bairro, String complemento, String estado, String logradouro,
-				String localidade, String uf, Integer numero) {
+		public Endereco(String cep, String logradouro, String bairro, String localidade, String uf,
+				String estado, String regiao, String complemento) {
 			super();
 			this.cep = cep;
-			this.regiao = regiao;
-			this.bairro = bairro;
-			this.complemento = complemento;
-			this.estado = estado;
 			this.logradouro = logradouro;
+			this.bairro = bairro;
 			this.localidade = localidade;
 			this.uf = uf;
-			this.numero = numero;
+			this.estado = estado;
+			this.regiao = regiao;
+			this.complemento = complemento;
 		}
-		
 		public EnderecoResponseDTO toResponseDTO() {
 			return new EnderecoResponseDTO(this.cep,
 					this.logradouro, this.complemento, this.bairro, this.localidade,
-					this.uf, this.estado, this.regiao, this.numero);
+					this.uf, this.estado, this.regiao);
 		}
 	
 }
