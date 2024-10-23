@@ -40,6 +40,12 @@ public class FuncionarioController {
 		FuncionarioResponseDTO funcionarioAtualizado = funcionarioService.atualizarFuncionario(id, funcionarioDTO);
 		return ResponseEntity.ok(funcionarioAtualizado);
 	}
+	
+	@GetMapping
+	@Operation(summary = "Buscar todos os funcionários")
+	public List<FuncionarioResponseIdDTO> listarFuncionario() {
+		return funcionarioService.buscarTodos();
+	}
 
 
 }

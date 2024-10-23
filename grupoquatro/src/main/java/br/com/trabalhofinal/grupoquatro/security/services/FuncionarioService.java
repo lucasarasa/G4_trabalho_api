@@ -111,5 +111,17 @@ public class FuncionarioService {
 	    return requestDTO;
 
 	}
+	
+	public List<FuncionarioResponseIdDTO> buscarTodos() {
+		List<Funcionario> funcionarios = funcionarioRepository.findAll();
+		return funcionarios.stream().map(funcionario -> new FuncionarioResponseIdDTO(funcionario.getId(),
+				funcionario.getNome(),
+				funcionario.getCpf(),
+				funcionario.getTelefone(),
+				funcionario.getFkUser().getEmail(),
+				funcionario.getCargo(),
+				funcionario.getFkUser().getUsername(),
+				funcionario.getFkUser().getRoles())).collect(Collectors.toList());
+	}
 
 }
