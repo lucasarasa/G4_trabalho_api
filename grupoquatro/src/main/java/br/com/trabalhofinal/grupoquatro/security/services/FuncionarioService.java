@@ -132,5 +132,19 @@ public class FuncionarioService {
             return false;
         }
     }
+	
+	public FuncionarioResponseDTO buscarFuncionario(Integer id) {
 
+		Optional<Funcionario> funcionario = funcionarioRepository.findById(id);
+		FuncionarioResponseDTO funcionarioResponseDTO = new FuncionarioResponseDTO();
+		funcionarioResponseDTO.setNome(funcionario.get().getNome());
+		funcionarioResponseDTO.setCpf(funcionario.get().getCpf());
+		funcionarioResponseDTO.setTelefone(funcionario.get().getTelefone());
+		funcionarioResponseDTO.setEmail(funcionario.get().getFkUser().getEmail());
+		funcionarioResponseDTO.setCargo(funcionario.get().getCargo());
+		funcionarioResponseDTO.setUsername(funcionario.get().getFkUser().getUsername());
+		funcionarioResponseDTO.setRole(funcionario.get().getFkUser().getRoles());
+
+		return funcionarioResponseDTO;
+	}
 }

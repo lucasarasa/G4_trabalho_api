@@ -57,5 +57,10 @@ public class FuncionarioController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Objeto não deletado!");
         }
     }
-
+	
+	@GetMapping("/{id}")
+	@Operation(summary = "Pesquisar funcionário pelo ID")
+	public FuncionarioResponseDTO buscarFuncionario(@PathVariable Integer id) {
+	return funcionarioService.buscarFuncionario(id);
+	}
 }
