@@ -1,6 +1,7 @@
 package br.com.trabalhofinal.grupoquatro.security.dto;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 public class ClienteRequestDTO {
 	private String nome; 
@@ -9,8 +10,15 @@ public class ClienteRequestDTO {
 	private LocalDate dataNascimento; 
 	private String telefone;
 	private String email;
+	public Set<String> getRole() {
+		return role;
+	}
+	public void setRole(Set<String> role) {
+		this.role = role;
+	}
 	private String username;
 	private String password;
+	private Set<String> role;
 	
 	public String getEmail() {
 		return email;
