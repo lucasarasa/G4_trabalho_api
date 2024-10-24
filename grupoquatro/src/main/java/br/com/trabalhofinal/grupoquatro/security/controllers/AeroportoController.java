@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.AeroportoRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.MessageResponseDTO;
+import br.com.trabalhofinal.grupoquatro.security.entities.Aeroporto;
+import br.com.trabalhofinal.grupoquatro.security.repositories.AeroportoRepository;
 import br.com.trabalhofinal.grupoquatro.security.services.AeroportoService;
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -26,6 +28,9 @@ public class AeroportoController {
 	@Autowired
 	AeroportoService aeroportoService;
 	
+	@Autowired
+	AeroportoRepository aeroportoRepository;
+	
 	@GetMapping
 	@Operation(summary="Listar aeroporto")
 	public List<AeroportoRequestDTO> listarAeroporto(){
@@ -35,8 +40,15 @@ public class AeroportoController {
 	@PostMapping
 	@Operation(summary = "Cadastrar aeroporto.")
 	public ResponseEntity<?> cadastrarAeroporto(@RequestBody AeroportoRequestDTO aeroportoRequestDTO){
-		aeroportoService.cadastrarAeroporto(aeroportoRequestDTO);
-		return ResponseEntity.ok(new MessageResponseDTO("Aeroporto cadastrado com sucesso!"));
+		List<Aeroporto> aeroportos = aeroportoRepository.findAll();
+		
+		if(!aeroportos.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Já existe um aeroporto cadastrado. Não é possível cadastrar outro.");
+		} else {
+			aeroportoService.cadastrarAeroporto(aeroportoRequestDTO);
+			return ResponseEntity.ok(new MessageResponseDTO("Aeroporto cadastrado com sucesso!"));			
+		}
+		
 	}
 	
 	@PutMapping

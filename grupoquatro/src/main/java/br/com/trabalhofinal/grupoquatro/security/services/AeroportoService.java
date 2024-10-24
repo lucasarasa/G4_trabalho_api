@@ -31,7 +31,7 @@ public class AeroportoService {
 		aeroporto.setNome(aeroportoRequestDTO.getNome());
 		aeroporto.setEmail(aeroportoRequestDTO.getEmail());
 
-		
+		//vincular endereço
 		aeroportoRepository.save(aeroporto);
 	}
 	
