@@ -3,6 +3,8 @@ package br.com.trabalhofinal.grupoquatro.security.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +28,7 @@ public class Cliente {
 	@Column(name="cli_tx_nome")
 	private String nome;
 	
+	@CPF(message="Cpf deve ser válido!")
 	@Column(name="cli_tx_cpf")
 	private String cpf;
 	
@@ -45,6 +48,17 @@ public class Cliente {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true, name = "fkUser")
 	private User fkUser;
+	
+	public Cliente() {
+	}
+	
+	public Cliente(String nome, String cpf, String cartao, LocalDate dataNascimento, String telefone) {
+		this.nome = nome; 
+		this.cpf = cpf; 
+		this.cartao = cartao; 
+		this.dataNascimento = dataNascimento; 
+		this.telefone = telefone;
+	}
 	
 	public User getFkUser() {
 		return fkUser;

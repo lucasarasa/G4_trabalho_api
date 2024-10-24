@@ -15,7 +15,7 @@ import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
-@SecurityScheme(name="bearer Auth", type=SecuritySchemeType.HTTP, scheme="bearer", bearerFormat="JWT")
+@SecurityScheme(name="Bearer Auth", type=SecuritySchemeType.HTTP, scheme="bearer", bearerFormat="JWT")
 public class SwaggerConfig {
 	
 	@Value("${prop.swagger.dev-url}")
@@ -38,7 +38,7 @@ public class SwaggerConfig {
 		
 		Info info = new Info();
 		info.setTitle("Grupo 4");
-		info.setVersion("10.0.1");
+		info.setVersion("24.5.0");
 		info.setDescription("API Grupo 4");
 		info.setContact(contact);
 		info.setLicense(license);
