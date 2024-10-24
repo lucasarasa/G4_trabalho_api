@@ -1,5 +1,6 @@
 package br.com.trabalhofinal.grupoquatro.security.services;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,8 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.ClienteRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ClienteResponseDTO;
@@ -22,6 +25,9 @@ import br.com.trabalhofinal.grupoquatro.security.repositories.UserRepository;
 @Service
 public class ClienteService {
 
+	@Autowired
+	FotoService fotoService;
+	
 	@Autowired
 	RoleRepository roleRepository;
 
@@ -38,7 +44,7 @@ public class ClienteService {
 		return clienteRepository.save(cliente);
 	}
 
-	public ClienteResponseDTO adicionarCliente(ClienteRequestDTO clienteDto) {
+	public ClienteResponseDTO adicionarCliente(ClienteRequestDTO clienteDto, @RequestPart MultipartFile foto) throws IOException {
 		ClienteResponseDTO cliente = new ClienteResponseDTO();
 		cliente.setNome(clienteDto.getNome());
 		cliente.setCpf(clienteDto.getCpf());
@@ -82,9 +88,11 @@ public class ClienteService {
 		usuario.setRoles(roles);
 
 		userRepository.save(usuario);
+		fotoService.cadastrarFoto(foto, usuario);
 		Cliente clienteConvert = cliente.toCliente();
 		clienteConvert.setFkUser(usuario);
 		clienteRepository.save(clienteConvert);
+		
 		return cliente;
 	}
 
@@ -129,4 +137,5 @@ public class ClienteService {
 	public List<Cliente> clienteList() {
 		return clienteRepository.findAll();
 	}
+
 }
