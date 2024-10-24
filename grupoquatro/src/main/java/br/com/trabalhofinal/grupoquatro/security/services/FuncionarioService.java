@@ -1,5 +1,6 @@
 package br.com.trabalhofinal.grupoquatro.security.services;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +10,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.FuncionarioRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.FuncionarioRequestUpdateDTO;
@@ -33,8 +36,10 @@ public class FuncionarioService {
 	RoleRepository roleRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	FotoService fotoService;
 	
-	public FuncionarioResponseDTO cadastrarFuncionario(FuncionarioRequestDTO funcionario) {
+	public FuncionarioResponseDTO cadastrarFuncionario(FuncionarioRequestDTO funcionario, @RequestPart MultipartFile foto) throws IOException {
 		FuncionarioResponseDTO newFuncionario = new FuncionarioResponseDTO();
 		newFuncionario.setNome(funcionario.getNome());
 		newFuncionario.setCpf(funcionario.getCpf());
@@ -77,6 +82,7 @@ public class FuncionarioService {
 		}
 		usuario.setRoles(roles);
 		userRepository.save(usuario);
+		fotoService.cadastrarFoto(foto, usuario);
 		
 
 		Funcionario funcionarioConvert = newFuncionario.toFuncionario();
