@@ -1,5 +1,6 @@
 package br.com.trabalhofinal.grupoquatro.security.entities;
 
+import br.com.trabalhofinal.grupoquatro.security.dto.PedidoResponseDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,11 +26,13 @@ public class Pedido {
 	private Integer quantidade;
 	@Column(name="ped_nb_valortotal")
 	private Double valorTotal;
+	@Column(name="ped_tx_status")
+	private String status;
 	
 	@ManyToOne
 	@JoinColumn(name="fk_cliente")
 	private Cliente fkCliente;
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -73,9 +76,23 @@ public class Pedido {
 	public Cliente getFkCliente() {
 		return fkCliente;
 	}
-
+	
 	public void setFkCliente(Cliente fkCliente) {
 		this.fkCliente = fkCliente;
 	}
 	
+	public Pedido(String numero, Integer assento, Integer quantidade, Double valorTotal, String status) {
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public PedidoResponseDTO toResponseDTO() {
+	    return new PedidoResponseDTO(this.numero, this.assento, this.quantidade, this.valorTotal, this.status, this.fkCliente.getNome());
+
+	}
 }
