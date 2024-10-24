@@ -3,6 +3,8 @@ package br.com.trabalhofinal.grupoquatro.security.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,43 +19,44 @@ import jakarta.persistence.Table;
 @Entity
 @Table
 public class Cliente {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="cli_cd_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cli_cd_id")
 	private Integer id;
-	
-	@Column(name="cli_tx_nome")
+
+	@Column(name = "cli_tx_nome")
 	private String nome;
-	
-	@Column(name="cli_tx_cpf")
+
+	@CPF(message = "Cpf deve ser válido!")
+	@Column(name = "cli_tx_cpf")
 	private String cpf;
-	
-	@Column(name="cli_tx_cartao")
+
+	@Column(name = "cli_tx_cartao")
 	private String cartao;
-	
-	@Column(name="cli_dt_dt")
+
+	@Column(name = "cli_dt_dt")
 	private LocalDate dataNascimento;
-	
-	@Column(name="cli_tx_telefone")
+
+	@Column(name = "cli_tx_telefone")
 	private String telefone;
 
-	@OneToMany(mappedBy="fkCliente")
-	@Column(name="fk_pedido")
+	@OneToMany(mappedBy = "fkCliente")
+	@Column(name = "fk_pedido")
 	private List<Pedido> fkPedido;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(unique = true, name = "fkUser")
 	private User fkUser;
-	
+
 	public Cliente() {
 	}
-	
+
 	public Cliente(String nome, String cpf, String cartao, LocalDate dataNascimento, String telefone) {
-		this.nome = nome; 
-		this.cpf = cpf; 
-		this.cartao = cartao; 
-		this.dataNascimento = dataNascimento; 
+		this.nome = nome;
+		this.cpf = cpf;
+		this.cartao = cartao;
+		this.dataNascimento = dataNascimento;
 		this.telefone = telefone;
 	}
 
@@ -117,5 +120,4 @@ public class Cliente {
 		this.fkPedido = fkPedido;
 	}
 
-	
 }
