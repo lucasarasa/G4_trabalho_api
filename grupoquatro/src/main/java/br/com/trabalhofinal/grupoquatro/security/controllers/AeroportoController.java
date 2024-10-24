@@ -34,7 +34,7 @@ public class AeroportoController {
 	AeroportoRepository aeroportoRepository;
 	
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping
 	@Operation(summary="Listar aeroporto")
 	public List<AeroportoRequestDTO> listarAeroporto(){
@@ -42,7 +42,7 @@ public class AeroportoController {
 	}
 	
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	@Operation(summary = "Cadastrar aeroporto.")
 	public ResponseEntity<?> cadastrarAeroporto(@RequestBody AeroportoRequestDTO aeroportoRequestDTO){
@@ -58,7 +58,7 @@ public class AeroportoController {
 	}
 	
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping
 	@Operation(summary="Atualizar aeroporto.")
 	public ResponseEntity<?> atualizarAeroporto(@RequestBody AeroportoRequestDTO aeroportoRequestDTO){
@@ -67,7 +67,7 @@ public class AeroportoController {
 	}
 	
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	@Operation(summary="Deletar aeroporto")
 	public ResponseEntity<String> deletarAeroporto(@PathVariable Integer id){

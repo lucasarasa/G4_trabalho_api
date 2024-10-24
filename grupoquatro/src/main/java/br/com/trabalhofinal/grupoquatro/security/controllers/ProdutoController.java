@@ -35,7 +35,7 @@ public class ProdutoController {
 	EnderecoRepository enderecoRepository;
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/cadastrar-produto")
 	@Operation(summary = "Cadastrar um novo produto")
 	public String cadastrarProduto(@RequestBody ProdutoRequestDTO produtoDTO) {
@@ -50,7 +50,7 @@ public class ProdutoController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/buscar-todos")
 	@Operation(summary = "Buscar todos os produtos cadastrados")
 	public List<ProdutoResponseDTO> buscarTodos() {
@@ -58,7 +58,7 @@ public class ProdutoController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{id}")
 	@Operation(summary = "Buscar um produto pelo ID")
 	public ProdutoResponseDTO buscarProduto(@PathVariable Integer id) {
@@ -66,7 +66,7 @@ public class ProdutoController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
 	@Operation(summary = "Atualizar um produto")
 	public ResponseEntity<?> atualizarProduto(@PathVariable Integer id, @RequestBody ProdutoRequestUpdateDTO produto) {
@@ -74,7 +74,7 @@ public class ProdutoController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	@Operation(summary = "Deletar um produto pelo ID")
 	public String deletarProduto(@PathVariable Integer id) {

@@ -39,7 +39,7 @@ public class FuncionarioController {
 	UserRepository userRepository;
 	
 //	@SecurityRequirement(name="Bearer Auth")
-//    @PreAuthorize("hasRole('admin')")
+//    @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/inserir")
 	@Operation(summary = "Adicionar um novo funcionário")
 	public ResponseEntity<?> cadastrarFuncionario(@Valid @RequestPart FuncionarioRequestDTO funcionario, @RequestPart MultipartFile foto) throws IOException {
@@ -54,7 +54,7 @@ public class FuncionarioController {
 	}
 	
 	@SecurityRequirement(name="Bearer Auth")
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
 	@Operation(summary = "Atualizar um funcionário existente")
 	public ResponseEntity<FuncionarioResponseDTO> atualizarFuncionario(@PathVariable Integer id,@RequestBody FuncionarioRequestUpdateDTO funcionarioDTO) {
@@ -63,7 +63,7 @@ public class FuncionarioController {
 	}
 	
 	@SecurityRequirement(name="Bearer Auth")
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("hasRole('ADMIN')")
 	@GetMapping
 	@Operation(summary = "Buscar todos os funcionários")
 	public List<FuncionarioResponseIdDTO> listarFuncionario() {
@@ -71,7 +71,7 @@ public class FuncionarioController {
 	}
 	
 	@SecurityRequirement(name="Bearer Auth")
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	@Operation(summary = "Deletar um funcionário pelo ID")
     public ResponseEntity<String> deletarId(@PathVariable Integer id) {
@@ -84,7 +84,7 @@ public class FuncionarioController {
     }
 	
 	@SecurityRequirement(name="Bearer Auth")
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{id}")
 	@Operation(summary = "Pesquisar funcionário pelo ID")
 	public FuncionarioResponseDTO buscarFuncionario(@PathVariable Integer id) {

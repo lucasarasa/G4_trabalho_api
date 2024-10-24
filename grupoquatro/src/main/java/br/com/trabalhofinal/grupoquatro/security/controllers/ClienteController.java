@@ -52,7 +52,7 @@ public class ClienteController {
 	}
 	
 	@SecurityRequirement(name="Bearer Auth")
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/listar")
 	@Operation(summary = "Listar todos os clientes")
 	public List<Cliente> listaCliente() {
