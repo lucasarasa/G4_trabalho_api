@@ -51,9 +51,6 @@ public class Produto {
     @JoinColumn(name="fk_categoria")
     private Categoria fkCategoria;
 	
-	@ManyToOne
-	@JoinColumn(name="fk_aeroporto")
-	private Aeroporto fkAeroporto;
 
 	public Integer getId() {
 		return id;
@@ -118,12 +115,5 @@ public class Produto {
 	public void setFkCategoria(Categoria fkCategoria) {
 		this.fkCategoria = fkCategoria;
 	}
-
-	public Aeroporto getFkAeroporto() {
-		return fkAeroporto;
-	}
-
-	public void setFkAeroporto(Aeroporto fkAeroporto) {
-		this.fkAeroporto = fkAeroporto;
-	}	
+	
 }

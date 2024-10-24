@@ -1,8 +1,9 @@
 package br.com.trabalhofinal.grupoquatro.security.entities;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -27,14 +28,11 @@ public class Funcionario {
 	private Integer id;
 	@Column(name="fun_tx_nome")
 	private String nome;
+	@CPF(message="Cpf deve ser válido")
 	@Column(name="fun_tx_cpf")
 	private String cpf;
     @Column(name="fun_tx_telefone")
     private String telefone;
-    @Column(name="fun_dt_nascimento")
-    private LocalDate dataNascimento;
-    @Column(name="fun_tx_email")
-    private String email;
 	@Column(name="fun_tx_cargo")
 	private String cargo;
 	
@@ -49,16 +47,23 @@ public class Funcionario {
 	public Funcionario() {
 	}
 
-	public Funcionario(Integer id, String nome, String cpf, String telefone, LocalDate dataNascimento, String email,
+	public Funcionario(Integer id, String nome, String cpf, String telefone,
 			String cargo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.telefone = telefone;
-		this.dataNascimento = dataNascimento;
-		this.email = email;
 		this.cargo = cargo;
+	}
+
+	public Funcionario(String nome, String cpf, String telefone,
+			String cargo) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.telefone = telefone;
+		this.cargo = cargo;
+
 	}
 
 	public Integer getId() {
@@ -93,21 +98,6 @@ public class Funcionario {
 		this.telefone = telefone;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public String getCargo() {
 		return cargo;
