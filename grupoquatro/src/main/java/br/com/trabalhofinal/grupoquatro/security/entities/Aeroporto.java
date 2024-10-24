@@ -33,23 +33,18 @@ public class Aeroporto {
 	private Endereco fkEndereco;
 
 	@OneToMany(mappedBy = "fkAeroporto")
-	@Column(name = "aer_fk_produto")
-	private List<Produto> fkProduto;
-
-	@OneToMany(mappedBy = "fkAeroporto")
 	@Column(name = "aer_fk_user")
 	private List<User> fkUser;
 
 	public Aeroporto() {
 	}
 
-	public Aeroporto(Integer id, String nome, String email, Endereco fkEndereco, List<Produto> fkProduto,
+	public Aeroporto(Integer id, String nome, String email, Endereco fkEndereco,
 			List<User> fkUser) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.fkEndereco = fkEndereco;
-		this.fkProduto = fkProduto;
 		this.fkUser = fkUser;
 	}
 
@@ -85,26 +80,12 @@ public class Aeroporto {
 		this.fkEndereco = fkEndereco;
 	}
 
-	public List<Produto> getFkProduto() {
-		return fkProduto;
-	}
-
-	public void setFkProduto(List<Produto> fkProduto) {
-		this.fkProduto = fkProduto;
-	}
-
 	public List<User> getFkUser() {
 		return fkUser;
 	}
 
 	public void setFkUser(List<User> fkUser) {
 		this.fkUser = fkUser;
-	}
-
-	@Override
-	public String toString() {
-		return "Aeroporto [id=" + id + ", nome=" + nome + ", email=" + email + ", fkEndereco=" + fkEndereco
-				+ ", fkProduto=" + fkProduto + ", fkUser=" + fkUser + "]";
 	}
 
 }

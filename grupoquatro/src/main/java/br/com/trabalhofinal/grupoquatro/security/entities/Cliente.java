@@ -17,7 +17,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name="cliente")
 public class Cliente {
 	
 	@Id
@@ -58,14 +58,6 @@ public class Cliente {
 		this.cartao = cartao; 
 		this.dataNascimento = dataNascimento; 
 		this.telefone = telefone;
-	}
-	
-	public User getFkUser() {
-		return fkUser;
-	}
-
-	public void setFkUser(User fkUser) {
-		this.fkUser = fkUser;
 	}
 
 	public Integer getId() {
@@ -116,8 +108,20 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 
+	public List<Pedido> getFkPedido() {
+		return fkPedido;
+	}
+
 	public void setFkPedido(List<Pedido> fkPedido) {
 		this.fkPedido = fkPedido;
+	}
+
+	public User getFkUser() {
+		return fkUser;
+	}
+
+	public void setFkUser(User fkUser) {
+		this.fkUser = fkUser;
 	}
 	
 }

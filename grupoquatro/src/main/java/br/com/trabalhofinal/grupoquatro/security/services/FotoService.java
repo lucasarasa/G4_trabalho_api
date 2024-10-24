@@ -5,6 +5,7 @@ import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -34,6 +35,8 @@ public class FotoService {
                 .buildAndExpand(user.getId()).toUri();
 		return uri.toString();
 	}
+	
+	@Transactional(readOnly = true)
 	public byte[] getFoto(Integer id) throws Exception {
 		Foto foto = fotoRepository.buscarFotoPorIdUsuario(id);
 		if(foto == null) {

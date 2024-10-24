@@ -22,7 +22,6 @@ import br.com.trabalhofinal.grupoquatro.security.dto.FuncionarioRequestUpdateDTO
 import br.com.trabalhofinal.grupoquatro.security.dto.FuncionarioResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.FuncionarioResponseIdDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.MessageResponseDTO;
-import br.com.trabalhofinal.grupoquatro.security.dto.SignupRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.repositories.UserRepository;
 import br.com.trabalhofinal.grupoquatro.security.services.FuncionarioService;
 import io.swagger.v3.oas.annotations.Operation;
