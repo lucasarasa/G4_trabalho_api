@@ -44,19 +44,26 @@ public class ClienteController {
 	@Autowired
 	ClienteService clienteService;
 
+	@SecurityRequirement(name="Bearer Auth")
+    @PreAuthorize("hasRole('USER')")
 	@GetMapping("/{id}")
+	@Operation(summary = "Buscas cliente por id")
 	public Optional<Cliente> buscarPorId(@PathVariable Integer id) {
 		return clienteService.buscarPorId(id);
 	}
 	
+	@SecurityRequirement(name="Bearer Auth")
+    @PreAuthorize("hasRole('admin')")
 	@GetMapping("/listar")
-	public List<Cliente> listaFilme() {
+	@Operation(summary = "Listar todos os clientes")
+	public List<Cliente> listaCliente() {
 		return clienteService.clienteList();
 	}
 	
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('USER')")
 	@DeleteMapping("/deleteId/{id}")
+	@Operation(summary = "Deletar cliente por id")
 	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
 		boolean resultDelete = clienteService.clienteDelete(id);
 		if(resultDelete) {
@@ -66,7 +73,10 @@ public class ClienteController {
 		}
 	}
 	
+	@SecurityRequirement(name="Bearer Auth")
+    @PreAuthorize("hasRole('USER')")
 	@PutMapping("/{id}")
+	@Operation(summary = "Alterar cliente por id")
 	public String atualizarCliente(@PathVariable Integer id,@RequestBody ClienteRequestDTO clienteDto) {
 		return clienteService.atualizarCliente(id, clienteDto);
 	}
