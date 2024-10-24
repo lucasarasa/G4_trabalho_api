@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import br.com.trabalhofinal.grupoquatro.security.dto.MessageResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.repositories.UserRepository;
 import br.com.trabalhofinal.grupoquatro.security.services.FuncionarioService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
@@ -36,6 +38,8 @@ public class FuncionarioController {
 	@Autowired
 	UserRepository userRepository;
 	
+//	@SecurityRequirement(name="Bearer Auth")
+//    @PreAuthorize("hasRole('admin')")
 	@PostMapping("/inserir")
 	@Operation(summary = "Adicionar um novo funcionário")
 	public ResponseEntity<?> cadastrarFuncionario(@Valid @RequestPart FuncionarioRequestDTO funcionario, @RequestPart MultipartFile foto) throws IOException {
@@ -47,20 +51,10 @@ public class FuncionarioController {
 		}
 		funcionarioService.cadastrarFuncionario(funcionario, foto);
 		return ResponseEntity.ok(new MessageResponseDTO("Usuário registrado com sucesso!"));
-//		return funcionarioService.cadastrarFuncionario(funcionario);
 	}
 	
-//	@PostMapping("/signup")
-//	public ResponseEntity<?> registerUser(@Valid @RequestPart SignupRequestDTO signUpRequest, @RequestPart MultipartFile foto) throws IOException {
-//		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-//			return ResponseEntity.badRequest().body(new MessageResponseDTO("Erro: Username já utilizado!"));
-//		}
-//
-//		if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-//			return ResponseEntity.badRequest().body(new MessageResponseDTO("Erro: Email já utilizado!"));
-//		}
-//		return ResponseEntity.ok(new MessageResponseDTO("Usuário registrado com sucesso!"));
-	
+	@SecurityRequirement(name="Bearer Auth")
+    @PreAuthorize("hasRole('admin')")
 	@PutMapping("/{id}")
 	@Operation(summary = "Atualizar um funcionário existente")
 	public ResponseEntity<FuncionarioResponseDTO> atualizarFuncionario(@PathVariable Integer id,@RequestBody FuncionarioRequestUpdateDTO funcionarioDTO) {
@@ -68,12 +62,16 @@ public class FuncionarioController {
 		return ResponseEntity.ok(funcionarioAtualizado);
 	}
 	
+	@SecurityRequirement(name="Bearer Auth")
+    @PreAuthorize("hasRole('admin')")
 	@GetMapping
 	@Operation(summary = "Buscar todos os funcionários")
 	public List<FuncionarioResponseIdDTO> listarFuncionario() {
 		return funcionarioService.buscarTodos();
 	}
 	
+	@SecurityRequirement(name="Bearer Auth")
+    @PreAuthorize("hasRole('admin')")
 	@DeleteMapping("/{id}")
 	@Operation(summary = "Deletar um funcionário pelo ID")
     public ResponseEntity<String> deletarId(@PathVariable Integer id) {
@@ -85,6 +83,8 @@ public class FuncionarioController {
         }
     }
 	
+	@SecurityRequirement(name="Bearer Auth")
+    @PreAuthorize("hasRole('admin')")
 	@GetMapping("/{id}")
 	@Operation(summary = "Pesquisar funcionário pelo ID")
 	public FuncionarioResponseDTO buscarFuncionario(@PathVariable Integer id) {
