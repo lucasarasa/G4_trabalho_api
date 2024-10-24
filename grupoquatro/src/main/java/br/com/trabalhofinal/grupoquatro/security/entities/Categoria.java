@@ -16,10 +16,10 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cat_cd_id")
-	private Long id;
+	private Integer id;
 
-	@Column(name = "cat_tx_nome")
-	private String nome;
+	@Column(name = "cat_tx_tipo")
+	private String tipo;
 
 	@Column(name = "cat_tx_descricao")
 	private String descricao;
@@ -28,20 +28,32 @@ public class Categoria {
     @Column(unique=true, name="fk_produto")
     private List<Produto> fkProduto;
 
-	public Long getId() {
+	public Categoria() {
+		
+	}
+	
+	public Categoria(Integer id, String tipo, String descricao, List<Produto> fkProduto) {
+		super();
+		this.id = id;
+		this.tipo = tipo;
+		this.descricao = descricao;
+		this.fkProduto = fkProduto;
+	}
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
-	}
+	public String getTipo() {
+		return tipo;
+	} 
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getDescricao() {
@@ -59,6 +71,4 @@ public class Categoria {
 	public void setFkProduto(List<Produto> fkProduto) {
 		this.fkProduto = fkProduto;
 	}
-	
-	
 }

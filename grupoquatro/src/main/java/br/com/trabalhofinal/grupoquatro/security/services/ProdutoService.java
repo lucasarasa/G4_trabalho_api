@@ -12,8 +12,10 @@ import br.com.trabalhofinal.grupoquatro.security.dto.MessageResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoRequestUpdateDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoResponseDTO;
+import br.com.trabalhofinal.grupoquatro.security.entities.Categoria;
 import br.com.trabalhofinal.grupoquatro.security.entities.Endereco;
 import br.com.trabalhofinal.grupoquatro.security.entities.Produto;
+import br.com.trabalhofinal.grupoquatro.security.repositories.CategoriaRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.EnderecoRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.ProdutoRepository;
 
@@ -26,8 +28,8 @@ public class ProdutoService {
 	@Autowired
 	EnderecoRepository enderecoRepository;
 
-//	@Autowired
-//	CategoriaRepository categoriaRepository;
+	@Autowired
+	CategoriaRepository categoriaRepository;
 
 	public ResponseEntity<?> cadastrarProduto(ProdutoRequestDTO produtoDTO) {
 
@@ -36,10 +38,8 @@ public class ProdutoService {
 		Endereco endereco = enderecoRepository.buscarEndereco(produtoDTO.getCepDestino());
 		produto.setFkEndereco(endereco);
 
-//		Categoria categoria = categoriaRepository.buscarCategoria(produtoDTO.getCategoria());
-		// produto.setFkCategoria(categoria);
-//		@Query(value = "select * from categoria where nome = :nome;", nativeQuery = true)
-//		public Categoria buscarCategoria(String nome);
+		Categoria categoria = categoriaRepository.buscarCategoria(produto.getFkCategoria().getTipo());
+		produto.setFkCategoria(categoria);		
 
 		produtoRepository.save(produto);
 
