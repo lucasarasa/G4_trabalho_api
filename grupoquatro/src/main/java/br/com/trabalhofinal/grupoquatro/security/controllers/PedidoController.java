@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.trabalhofinal.grupoquatro.security.dto.PedidoRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.PedidoRequestUpdateDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.PedidoResponseDTO;
+import br.com.trabalhofinal.grupoquatro.security.services.EmailService;
 import br.com.trabalhofinal.grupoquatro.security.services.PedidoService;
 
 @RestController
@@ -22,10 +23,14 @@ import br.com.trabalhofinal.grupoquatro.security.services.PedidoService;
 public class PedidoController {
 	
 	@Autowired
+	EmailService emailService;
+	
+	@Autowired
 	PedidoService pedidoService;
 	
 	@PostMapping
 	public PedidoResponseDTO adicionarPedido(@RequestBody PedidoRequestDTO pedidoDto) {
+		emailService.mailWriterPedido(pedidoDto);
 		return pedidoService.adicionarPedido(pedidoDto);
 	}
 	

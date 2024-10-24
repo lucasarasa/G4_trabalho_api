@@ -7,7 +7,7 @@ public class ProdutoRequestDTO {
 
 	private String nome;
 	private String descricao;
-//	private String Categoria;
+	private String Categoria;
 	private String CepDestino;
 	private Double preco;
 	public String getNome() {
@@ -23,12 +23,12 @@ public class ProdutoRequestDTO {
 		this.descricao = descricao;
 	}
 	
-//	public String getCategoria() {
-//		return Categoria;
-//	}
-//	public void setCategoria(String categoria) {
-//		Categoria = categoria;
-//	}
+	public String getCategoria() {
+		return Categoria;
+	}
+	public void setCategoria(String categoria) {
+		Categoria = categoria;
+	}
 	
 	public String getCepDestino() {
 		return CepDestino;

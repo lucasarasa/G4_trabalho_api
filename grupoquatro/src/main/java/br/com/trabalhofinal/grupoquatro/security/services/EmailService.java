@@ -13,11 +13,16 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.ClienteRequestDTO;
+import br.com.trabalhofinal.grupoquatro.security.dto.PedidoRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.entities.Cliente;
+import br.com.trabalhofinal.grupoquatro.security.repositories.ClienteRepository;
 
 @Component
 public class EmailService {
 
+	@Autowired
+	ClienteRepository clienteRepository;
+	
 	@Autowired
 	public JavaMailSender javaMailSender;
 
@@ -68,8 +73,10 @@ public class EmailService {
 		}
 	}
 	
-	public String mailWriterPedido(Optional<Cliente> cliente) {
+	public String mailWriterPedido(PedidoRequestDTO pedidoDto) {
 
+		Optional<Cliente>  cliente = clienteRepository.findById(pedidoDto.getIdCliente());
+		
 		LocalDateTime dateTime = LocalDateTime.now();
 		DateTimeFormatter dateForm = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
