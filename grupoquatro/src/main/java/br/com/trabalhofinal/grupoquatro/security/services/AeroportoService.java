@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.AeroportoRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.entities.Aeroporto;
+import br.com.trabalhofinal.grupoquatro.security.entities.Endereco;
 import br.com.trabalhofinal.grupoquatro.security.repositories.AeroportoRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.EnderecoRepository;
 
@@ -30,8 +31,10 @@ public class AeroportoService {
 		Aeroporto aeroporto = new Aeroporto();
 		aeroporto.setNome(aeroportoRequestDTO.getNome());
 		aeroporto.setEmail(aeroportoRequestDTO.getEmail());
+		
+		Endereco endereco = enderecoRepository.buscarEnderecoUnico();
+		aeroporto.setFkEndereco(endereco);
 
-		//vincular endereço
 		aeroportoRepository.save(aeroporto);
 	}
 	
