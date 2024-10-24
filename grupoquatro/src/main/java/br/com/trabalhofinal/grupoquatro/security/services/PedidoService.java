@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.trabalhofinal.grupoquatro.security.dto.PedidoRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.PedidoRequestUpdateDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.PedidoResponseDTO;
+import br.com.trabalhofinal.grupoquatro.security.entities.Cliente;
 import br.com.trabalhofinal.grupoquatro.security.entities.Pedido;
 import br.com.trabalhofinal.grupoquatro.security.entities.Produto;
 import br.com.trabalhofinal.grupoquatro.security.repositories.ClienteRepository;
@@ -59,8 +60,8 @@ public class PedidoService {
 		Pedido pedidoConvert = pedido.toPedido();
 		pedidoConvert.setProdutos(pedidoProduto);
 		
-//		Cliente cliente = clienteRepository.buscarCliente(pedidoDto.getIdCliente());
-//		pedidoConvert.setFkCliente(cliente);
+		Cliente cliente = clienteRepository.buscarCliente(pedidoDto.getIdCliente());
+		pedidoConvert.setFkCliente(cliente);
 		pedidoRepository.save(pedidoConvert);
 		
 		return pedido;

@@ -25,6 +25,7 @@ import br.com.trabalhofinal.grupoquatro.security.dto.MessageResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.entities.Cliente;
 import br.com.trabalhofinal.grupoquatro.security.repositories.UserRepository;
 import br.com.trabalhofinal.grupoquatro.security.services.ClienteService;
+import br.com.trabalhofinal.grupoquatro.security.services.EmailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -33,6 +34,9 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
+	
+	@Autowired
+	EmailService emailService;
 	
 	@Autowired
 	UserRepository userRepository;
@@ -77,6 +81,7 @@ public class ClienteController {
 			return ResponseEntity.badRequest().body(new MessageResponseDTO("Erro: Email já utilizado!"));
 		}
 		clienteService.adicionarCliente(cliente, foto);
+		emailService.mailWriter(cliente);
 		return ResponseEntity.ok(new MessageResponseDTO("Usuário registrado com sucesso!"));
 	
 	}

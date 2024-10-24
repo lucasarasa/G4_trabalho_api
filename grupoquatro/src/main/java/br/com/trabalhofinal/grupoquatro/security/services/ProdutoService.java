@@ -38,7 +38,7 @@ public class ProdutoService {
 		Endereco endereco = enderecoRepository.buscarEndereco(produtoDTO.getCepDestino());
 		produto.setFkEndereco(endereco);
 
-		Categoria categoria = categoriaRepository.buscarCategoria(produto.getFkCategoria().getTipo());
+		Categoria categoria = categoriaRepository.buscarCategoria(produtoDTO.getCategoria());
 		produto.setFkCategoria(categoria);		
 
 		produtoRepository.save(produto);
