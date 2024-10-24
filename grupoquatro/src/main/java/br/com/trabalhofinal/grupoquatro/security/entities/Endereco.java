@@ -1,6 +1,5 @@
 package br.com.trabalhofinal.grupoquatro.security.entities;
 
-import br.com.trabalhofinal.grupoquatro.security.dto.EnderecoResponseDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,20 +19,22 @@ public class Endereco {
 		
 		@Column(name="cep")
 		private String cep;	
-		@Column(name="logradouro")
-		private String logradouro;
+		@Column(name="regiao")
+		private String regiao;
 		@Column(name="bairro")
 		private String bairro;
+		@Column(name="complemento")
+		private String complemento;
+		@Column(name="estado")
+		private String estado;
+		@Column(name="logradouro")
+		private String logradouro;
 		@Column(name="localidade")
 		private String localidade;
 		@Column(name="uf")
 		private String uf;
-		@Column(name="estado")
-		private String estado;
-		@Column(name="regiao")
-		private String regiao;
-		@Column(name="complemento")
-		private String complemento;	
+		@Column(name="numero")
+		private Integer numero;	
 		
 		@OneToOne(mappedBy = "fkEndereco")
 		private Aeroporto fkAeroporto;
@@ -64,6 +65,12 @@ public class Endereco {
 		}
 		public void setBairro(String bairro) {
 			this.bairro = bairro;
+		}
+		public Integer getNumero() {
+			return numero;
+		}
+		public void setNumero(Integer numero) {
+			this.numero = numero;
 		}
 		public String getComplemento() {
 			return complemento;
@@ -105,23 +112,26 @@ public class Endereco {
 		
 		public Endereco() {
 		}
-		
-		public Endereco(String cep, String logradouro, String bairro, String localidade, String uf,
-				String estado, String regiao, String complemento) {
-			super();
+		public Endereco(Integer id, String cep, String bairro, String complemento, String estado, String logradouro,
+				String localidade, String uf) {
+			this.id = id;
 			this.cep = cep;
-			this.logradouro = logradouro;
 			this.bairro = bairro;
+			this.complemento = complemento;
+			this.estado = estado;
+			this.logradouro = logradouro;
 			this.localidade = localidade;
 			this.uf = uf;
-			this.estado = estado;
-			this.regiao = regiao;
+		}	
+		public Endereco(String bairro, String cep, String complemento, String estado, String localidade,
+				String logradouro, Integer numero, String regiao, String uf) {
+			this.cep = cep;
+			this.bairro = bairro;
 			this.complemento = complemento;
-		}
-		public EnderecoResponseDTO toResponseDTO() {
-			return new EnderecoResponseDTO(this.cep,
-					this.logradouro, this.complemento, this.bairro, this.localidade,
-					this.uf, this.estado, this.regiao);
+			this.estado = estado;
+			this.logradouro = logradouro;
+			this.localidade = localidade;
+			this.uf = uf;
 		}
 	
 }

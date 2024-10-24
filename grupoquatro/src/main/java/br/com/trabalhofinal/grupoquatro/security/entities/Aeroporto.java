@@ -33,6 +33,10 @@ public class Aeroporto {
 	private Endereco fkEndereco;
 	
 	@OneToMany(mappedBy = "fkAeroporto")
+	@Column(name="aer_fk_produto")
+	private List<Produto> fkProduto;
+	
+	@OneToMany(mappedBy = "fkAeroporto")
 	@Column(name="aer_fk_user")
 	private List<User> fkUser;
 
@@ -66,6 +70,14 @@ public class Aeroporto {
 
 	public void setFkEndereco(Endereco fkEndereco) {
 		this.fkEndereco = fkEndereco;
+	}
+
+	public List<Produto> getFkProduto() {
+		return fkProduto;
+	}
+
+	public void setFkProduto(List<Produto> fkProduto) {
+		this.fkProduto = fkProduto;
 	}
 
 	public List<User> getFkUser() {

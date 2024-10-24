@@ -1,9 +1,9 @@
 package br.com.trabalhofinal.grupoquatro.security.entities;
 
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoResponseDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,6 +33,9 @@ public class Produto {
 	@Column(name="pro_tx_descricao")
 	private String descricao;
 	
+	@Column(name="pro_hr_descricao")
+	private LocalTime horario;
+	
 	@Column(name="pro_nb_preco")
 	private Double preco;
 	
@@ -47,16 +50,10 @@ public class Produto {
 	@ManyToOne
     @JoinColumn(name="fk_categoria")
     private Categoria fkCategoria;
-
 	
-	public Produto() {
-	}
-
-	public Produto(String nome, String descricao, Double preco) {
-		this.nome = nome;
-		this.descricao = descricao;
-		this.preco = preco;
-	}
+	@ManyToOne
+	@JoinColumn(name="fk_aeroporto")
+	private Aeroporto fkAeroporto;
 
 	public Integer getId() {
 		return id;
@@ -80,6 +77,14 @@ public class Produto {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public LocalTime getHorario() {
+		return horario;
+	}
+
+	public void setHorario(LocalTime horario) {
+		this.horario = horario;
 	}
 
 	public Double getPreco() {
@@ -113,9 +118,12 @@ public class Produto {
 	public void setFkCategoria(Categoria fkCategoria) {
 		this.fkCategoria = fkCategoria;
 	}
-	
-	public ProdutoResponseDTO toResponseDTO() {
-		return new ProdutoResponseDTO(this.nome, this.descricao, this.fkEndereco.getLocalidade(), this.preco);
+
+	public Aeroporto getFkAeroporto() {
+		return fkAeroporto;
 	}
-	
+
+	public void setFkAeroporto(Aeroporto fkAeroporto) {
+		this.fkAeroporto = fkAeroporto;
+	}	
 }
