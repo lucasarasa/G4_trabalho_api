@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import br.com.trabalhofinal.grupoquatro.security.entities.Endereco;
 import br.com.trabalhofinal.grupoquatro.security.repositories.EnderecoRepository;
 import br.com.trabalhofinal.grupoquatro.security.services.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/produto")
@@ -32,6 +34,8 @@ public class ProdutoController {
 	@Autowired
 	EnderecoRepository enderecoRepository;
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasRole('admin')")
 	@PostMapping("/cadastrar-produto")
 	@Operation(summary = "Cadastrar um novo produto")
 	public String cadastrarProduto(@RequestBody ProdutoRequestDTO produtoDTO) {
@@ -45,24 +49,32 @@ public class ProdutoController {
 		}
 	}
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasRole('admin')")
 	@GetMapping("/buscar-todos")
 	@Operation(summary = "Buscar todos os produtos cadastrados")
 	public List<ProdutoResponseDTO> buscarTodos() {
 		return produtoService.buscarTodos();
 	}
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasRole('admin')")
 	@GetMapping("/{id}")
 	@Operation(summary = "Buscar um produto pelo ID")
 	public ProdutoResponseDTO buscarProduto(@PathVariable Integer id) {
 		return produtoService.buscarProduto(id);
 	}
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasRole('admin')")
 	@PutMapping("/{id}")
 	@Operation(summary = "Atualizar um produto")
 	public ResponseEntity<?> atualizarProduto(@PathVariable Integer id, @RequestBody ProdutoRequestUpdateDTO produto) {
 		return produtoService.atualizarProduto(id, produto);
 	}
 
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasRole('admin')")
 	@DeleteMapping("/{id}")
 	@Operation(summary = "Deletar um produto pelo ID")
 	public String deletarProduto(@PathVariable Integer id) {

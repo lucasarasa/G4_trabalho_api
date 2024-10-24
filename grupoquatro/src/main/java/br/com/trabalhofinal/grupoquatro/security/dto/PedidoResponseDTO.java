@@ -28,12 +28,14 @@ public class PedidoResponseDTO {
 		this.nomeProduto = nomeProduto;
 	}
 
-	public PedidoResponseDTO(String numero, Integer assento, Integer quantidade, Double valorTotal, String status) {
+	public PedidoResponseDTO(String numero, Integer assento, Integer quantidade, Double valorTotal, String status,
+			String nomeCliente) {
 		this.numero = numero;
 		this.assento = assento;
 		this.quantidade = quantidade;
 		this.valorTotal = valorTotal;
 		this.status = status;
+		this.nomeCliente = nomeCliente;
 	}
 
 	public String getNumero() {

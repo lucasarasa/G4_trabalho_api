@@ -50,18 +50,20 @@ public class PedidoService {
 		
 		pedido.setNomeProduto(nomesProdutos);
 		
-		List<Pedido> produtoPedido = pedidoRepository.findAllById(pedidoDto.getIdProduto());
-		Set<Produto> pedidoProduto = new HashSet<>();
-		for (Pedido ped : produtoPedido) {
-			pedidoProduto.addAll(ped.getProdutos());
-		}
-		
-
+//		List<Pedido> produtoPedido = pedidoRepository.findAllById(pedidoDto.getIdProduto());
+//		Set<Produto> pedidoProduto = new HashSet<>();
+//		for (Pedido ped : produtoPedido) {
+//			pedidoProduto.addAll(ped.getProdutos());
+//		}
+//		
+//
 		Pedido pedidoConvert = pedido.toPedido();
-		pedidoConvert.setProdutos(pedidoProduto);
+//		pedidoConvert.setProdutos(pedidoProduto);
 		
 		Cliente cliente = clienteRepository.buscarCliente(pedidoDto.getIdCliente());
 		pedidoConvert.setFkCliente(cliente);
+		pedido.setNomeCliente(cliente.getNome());
+		
 		pedidoRepository.save(pedidoConvert);
 		
 		return pedido;
@@ -70,7 +72,7 @@ public class PedidoService {
 	public PedidoResponseDTO buscarPedido(Integer id) {
 
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
-		//Optional<Cliente> cliente = clienteRepository.findById(pedido.get().getFkCliente().getId());
+		Optional<Cliente> cliente = clienteRepository.findById(pedido.get().getFkCliente().getId());
 
 //		PedidoResponseDTO pedidoDTO = new PedidoResponseDTO();
 //		pedidoDTO.setNumero(pedido.get().getNumero());
@@ -78,20 +80,19 @@ public class PedidoService {
 //		pedidoDTO.setQuantidade(pedido.get().getQuantidade());
 //		pedidoDTO.setValorTotal(pedido.get().getValorTotal());
 //		pedidoDTO.setStatus(pedido.get().getStatus());
-//	
-//		
+//		pedidoDTO
 //		Set<String> nomesProdutos = new HashSet<>();
-//		List<Produto> produtos = produtoRepository.findAllById();
+//		List<Produto> produtos = produtoRepository.findAllById(id);
 //		for (Produto prod : produtos) {
 //			nomesProdutos.add(prod.getNome());
 //		}
-//		
+//
 //		pedidoDTO.setNomeProduto(nomesProdutos);
-//		
+//
 //		return pedidoDTO;
 		
 		return new PedidoResponseDTO(pedido.get().getNumero(), pedido.get().getAssento(), pedido.get().getQuantidade(),
-				pedido.get().getValorTotal(), pedido.get().getStatus());//, cliente.get().getNome());
+			pedido.get().getValorTotal(), pedido.get().getStatus(), cliente.get().getNome());
 	}
 
 	public boolean pedidoDelete(Integer id) {

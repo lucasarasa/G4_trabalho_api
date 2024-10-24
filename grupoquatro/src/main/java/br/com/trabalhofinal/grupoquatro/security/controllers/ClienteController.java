@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.ClienteRequestDTO;
-import br.com.trabalhofinal.grupoquatro.security.dto.ClienteResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.MessageResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.entities.Cliente;
 import br.com.trabalhofinal.grupoquatro.security.repositories.UserRepository;
