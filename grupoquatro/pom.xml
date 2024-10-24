@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>br.com.trabalhofinal</groupId>
 	<artifactId>grupoquatro</artifactId>
-	<version>15.0.2-SNAPSHOT</version>
+	<version>25.5.0-SNAPSHOT</version>
 	<name>grupoquatro</name>
 	<description>Projeto final do grupo quatro</description>
 	<url />
