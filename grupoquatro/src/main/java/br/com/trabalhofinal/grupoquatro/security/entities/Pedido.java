@@ -1,12 +1,17 @@
 package br.com.trabalhofinal.grupoquatro.security.entities;
 
-import br.com.trabalhofinal.grupoquatro.security.dto.PedidoResponseDTO;
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -29,10 +34,38 @@ public class Pedido {
 	@Column(name="ped_tx_status")
 	private String status;
 	
+	@ManyToMany(fetch = FetchType.LAZY) 
+	@JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
+	private Set<Produto> produtos = new HashSet<>();
+	
 	@ManyToOne
 	@JoinColumn(name="fk_cliente")
 	private Cliente fkCliente;
 	
+	public Pedido() {
+	
+	}
+
+	public Pedido(Integer id, String numero, Integer assento, Integer quantidade, Double valorTotal, String status,
+			Set<Produto> produtos, Cliente fkCliente) {
+		this.id = id;
+		this.numero = numero;
+		this.assento = assento;
+		this.quantidade = quantidade;
+		this.valorTotal = valorTotal;
+		this.status = status;
+		this.produtos = produtos;
+		this.fkCliente = fkCliente;
+	}
+
+	public Pedido(String numero, Integer assento, Integer quantidade, Double valorTotal, String status) {
+		this.numero = numero;
+		this.assento = assento;
+		this.quantidade = quantidade;
+		this.valorTotal = valorTotal;
+		this.status = status;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -81,9 +114,6 @@ public class Pedido {
 		this.fkCliente = fkCliente;
 	}
 	
-	public Pedido(String numero, Integer assento, Integer quantidade, Double valorTotal, String status) {
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -91,8 +121,16 @@ public class Pedido {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public PedidoResponseDTO toResponseDTO() {
-	    return new PedidoResponseDTO(this.numero, this.assento, this.quantidade, this.valorTotal, this.status, this.fkCliente.getNome());
-
+	
+	public Set<Produto> getProdutos() {
+		return produtos;
 	}
+
+	public void setProdutos(Set<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+//	public PedidoResponseDTO toResponseDTO() {
+//	    return new PedidoResponseDTO(this.numero, this.assento, this.quantidade, this.valorTotal, this.status, this.fkCliente.getNome(), this.getProdutos());
+//	}    
 }

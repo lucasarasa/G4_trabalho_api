@@ -1,19 +1,13 @@
 package br.com.trabalhofinal.grupoquatro.security.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoResponseDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -36,11 +30,7 @@ public class Produto {
 	@Column(name="pro_nb_preco")
 	private Double preco;
 	
-	@ManyToMany(fetch = FetchType.LAZY) 
-	@JoinTable(name = "produto_pedido", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "pedido_id"))
-	private Set<Pedido> pedidos = new HashSet<>();
-	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(unique = true, name = "fk_endereco")
 	private Endereco fkEndereco;
 	
@@ -88,14 +78,6 @@ public class Produto {
 
 	public void setPreco(Double preco) {
 		this.preco = preco;
-	}
-
-	public Set<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(Set<Pedido> pedidos) {
-		this.pedidos = pedidos;
 	}
 
 	public Endereco getFkEndereco() {

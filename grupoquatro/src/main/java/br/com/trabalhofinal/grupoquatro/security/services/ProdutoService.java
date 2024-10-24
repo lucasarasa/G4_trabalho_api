@@ -26,10 +26,9 @@ public class ProdutoService {
 
 	@Autowired
 	EnderecoRepository enderecoRepository;
-	
+
 	@Autowired
 	CategoriaRepository categoriaRepository;
-
 
 	public ResponseEntity<?> cadastrarProduto(ProdutoRequestDTO produtoDTO) {
 
@@ -39,13 +38,14 @@ public class ProdutoService {
 		produto.setFkEndereco(endereco);
 
 //		Categoria categoria = categoriaRepository.buscarCategoria(produtoDTO.getCategoria());
-//		produto.setFkCategoria(categoria);
-		
+		// produto.setFkCategoria(categoria);
+
 		produtoRepository.save(produto);
-		
+
 		return ResponseEntity.ok(new MessageResponseDTO("Produto registrado com sucesso!"));
+
 	}
-	
+
 	public List<ProdutoResponseDTO> buscarTodos() {
 		List<Produto> produtos = produtoRepository.findAll();
 		List<ProdutoResponseDTO> produtosDTO = new ArrayList<ProdutoResponseDTO>();
@@ -55,11 +55,11 @@ public class ProdutoService {
 
 		return produtosDTO;
 	}
-	
+
 	public ProdutoResponseDTO buscarProduto(Integer id) {
-		
+
 		Optional<Produto> produto = produtoRepository.findById(id);
-		
+
 		ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO();
 		produtoResponseDTO.setNome(produto.get().getNome());
 		produtoResponseDTO.setDescricao(produto.get().getDescricao());
@@ -67,7 +67,7 @@ public class ProdutoService {
 		produtoResponseDTO.setPreco(produto.get().getPreco());
 		return produtoResponseDTO;
 	}
-	
+
 	public ResponseEntity<?> atualizarProduto(Integer id, ProdutoRequestUpdateDTO produtoDTO) {
 		if (!produtoRepository.existsById(id)) {
 			return ResponseEntity.notFound().build();
@@ -79,13 +79,13 @@ public class ProdutoService {
 			if (produtoDTO.getPreco() != null) {
 				produto.setPreco(produtoDTO.getPreco());
 			}
-		
+
 			produtoRepository.save(produto);
 			return ResponseEntity.ok().build();
 		}
 
 	}
-	
+
 	public ResponseEntity<?> deletarProduto(Integer id) {
 		Optional<Produto> produto = produtoRepository.findById(id);
 
@@ -96,7 +96,5 @@ public class ProdutoService {
 			return ResponseEntity.notFound().build();
 		}
 	}
-
-	
 
 }

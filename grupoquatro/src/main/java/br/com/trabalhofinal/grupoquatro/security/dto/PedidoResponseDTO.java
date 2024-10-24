@@ -13,17 +13,29 @@ public class PedidoResponseDTO {
 	private String nomeCliente;
 	private Set<String> nomeProduto;	
 	
+	public PedidoResponseDTO() {
+	}
+	
 	public PedidoResponseDTO(String numero, Integer assento, Integer quantidade, Double valorTotal, String status,
-			String nomeCliente) {
+			String nomeCliente, Set<String> nomeProduto) {
+		super();
 		this.numero = numero;
 		this.assento = assento;
 		this.quantidade = quantidade;
 		this.valorTotal = valorTotal;
 		this.status = status;
 		this.nomeCliente = nomeCliente;
+		this.nomeProduto = nomeProduto;
 	}
-		public PedidoResponseDTO() {
+
+	public PedidoResponseDTO(String numero, Integer assento, Integer quantidade, Double valorTotal, String status) {
+		this.numero = numero;
+		this.assento = assento;
+		this.quantidade = quantidade;
+		this.valorTotal = valorTotal;
+		this.status = status;
 	}
+
 	public String getNumero() {
 		return numero;
 	}
@@ -67,7 +79,8 @@ public class PedidoResponseDTO {
 	public void setNomeProduto(Set<String> nomeProduto) {
 		this.nomeProduto = nomeProduto;
 	}
+	
 	public Pedido toPedido() {
 		return new Pedido(this.numero, this.assento, this.quantidade, this.valorTotal, this.status);
 	}
-}
+}	

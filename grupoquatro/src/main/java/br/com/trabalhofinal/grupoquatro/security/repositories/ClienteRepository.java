@@ -8,6 +8,6 @@ import br.com.trabalhofinal.grupoquatro.security.entities.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
-	@Query(value = "select * from cliente where id = :id;", nativeQuery = true)
+	@Query(value = "select * from cliente where cli_cd_id = :id;", nativeQuery = true)
     public Cliente buscarCliente(Integer id);
 }
