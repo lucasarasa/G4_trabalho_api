@@ -1,7 +1,6 @@
 package br.com.trabalhofinal.grupoquatro.security.services;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -43,22 +42,15 @@ public class PedidoService {
 		pedido.setStatus(pedidoDto.getStatus());
 
 		Set<String> nomesProdutos = new HashSet<>();
-		List<Produto> produtos = produtoRepository.findAllById(pedidoDto.getIdProduto());
+		Set<Produto> produtos = produtoRepository.retornaLista(pedidoDto.getIdProduto());
 		for (Produto prod : produtos) {
 			nomesProdutos.add(prod.getNome());
 		}
 		
 		pedido.setNomeProduto(nomesProdutos);
 		
-//		List<Pedido> produtoPedido = pedidoRepository.findAllById(pedidoDto.getIdProduto());
-//		Set<Produto> pedidoProduto = new HashSet<>();
-//		for (Pedido ped : produtoPedido) {
-//			pedidoProduto.addAll(ped.getProdutos());
-//		}
-//		
-//
 		Pedido pedidoConvert = pedido.toPedido();
-//		pedidoConvert.setProdutos(pedidoProduto);
+		pedidoConvert.setProdutos(produtos);
 		
 		Cliente cliente = clienteRepository.buscarCliente(pedidoDto.getIdCliente());
 		pedidoConvert.setFkCliente(cliente);
@@ -74,25 +66,14 @@ public class PedidoService {
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
 		Optional<Cliente> cliente = clienteRepository.findById(pedido.get().getFkCliente().getId());
 
-//		PedidoResponseDTO pedidoDTO = new PedidoResponseDTO();
-//		pedidoDTO.setNumero(pedido.get().getNumero());
-//		pedidoDTO.setAssento(pedido.get().getAssento());
-//		pedidoDTO.setQuantidade(pedido.get().getQuantidade());
-//		pedidoDTO.setValorTotal(pedido.get().getValorTotal());
-//		pedidoDTO.setStatus(pedido.get().getStatus());
-//		pedidoDTO
-//		Set<String> nomesProdutos = new HashSet<>();
-//		List<Produto> produtos = produtoRepository.findAllById(id);
-//		for (Produto prod : produtos) {
-//			nomesProdutos.add(prod.getNome());
-//		}
-//
-//		pedidoDTO.setNomeProduto(nomesProdutos);
-//
-//		return pedidoDTO;
+		Set<String> nomesProdutos = new HashSet<>();
+		Set<Produto> produtos = pedido.get().getProdutos();
+		for (Produto prod : produtos) {
+			nomesProdutos.add(prod.getNome());
+		}
 		
 		return new PedidoResponseDTO(pedido.get().getNumero(), pedido.get().getAssento(), pedido.get().getQuantidade(),
-			pedido.get().getValorTotal(), pedido.get().getStatus(), cliente.get().getNome());
+			pedido.get().getValorTotal(), pedido.get().getStatus(), cliente.get().getNome(), nomesProdutos);
 	}
 
 	public boolean pedidoDelete(Integer id) {

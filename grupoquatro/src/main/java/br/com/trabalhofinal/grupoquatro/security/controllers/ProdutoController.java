@@ -39,18 +39,23 @@ public class ProdutoController {
 	@Autowired
 	AeroportoRepository aeroportoRepository;
 
-	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
+//	@SecurityRequirement(name = "Bearer Auth")
+//	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/cadastrar-produto")
 	@Operation(summary = "Cadastrar um novo produto")
-	public String cadastrarProduto(@RequestBody ProdutoRequestDTO produtoDTO, @RequestBody Aeroporto aeroporto) {
+
+	public String cadastrarProduto(@RequestBody ProdutoRequestDTO produtoDTO) {
 		Optional<Endereco> endereco = enderecoRepository.existsByCep(produtoDTO.getCepDestino());
 
-		if (endereco.isPresent()) {
-			produtoService.cadastrarProduto(produtoDTO);
-			return "Produto cadastrado com sucesso!";
+		if (endereco.get().getId() != (1)) {
+			if (endereco.isPresent()) {
+				produtoService.cadastrarProduto(produtoDTO);
+				return "Produto cadastrado com sucesso!";
+			} else {
+				return "Erro ao cadastrar o produto. Cep não cadastrado.";
+			}
 		} else {
-			return "Erro ao cadastrar o produto. Cep não cadastrado.";
+			return "Não é possível cadastrar um produto com o Cep do Aeroporto";
 		}
 	}
 
