@@ -35,15 +35,15 @@ public class AeroportoController {
 	
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping
+	@GetMapping("/buscar-aeroporto")
 	@Operation(summary="Listar aeroporto")
 	public List<AeroportoRequestDTO> listarAeroporto(){
 		return aeroportoService.listarAeroporto();
 	}
-//	
+	
 //	@SecurityRequirement(name = "Bearer Auth")
 //	@PreAuthorize("hasRole('ADMIN')")
-	@PostMapping
+	@PostMapping("/cadastrar-aeroporto")
 	@Operation(summary = "Cadastrar aeroporto.")
 	public ResponseEntity<?> cadastrarAeroporto(@RequestBody AeroportoRequestDTO aeroportoRequestDTO){
 		List<Aeroporto> aeroportos = aeroportoRepository.findAll();
@@ -59,7 +59,7 @@ public class AeroportoController {
 	
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
-	@PutMapping
+	@PutMapping("/atualizar-aeroporto")
 	@Operation(summary="Atualizar aeroporto.")
 	public ResponseEntity<?> atualizarAeroporto(@RequestBody AeroportoRequestDTO aeroportoRequestDTO){
 		aeroportoService.atualizarAeroporto(aeroportoRequestDTO);

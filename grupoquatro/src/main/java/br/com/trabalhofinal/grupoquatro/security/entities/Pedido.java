@@ -16,52 +16,47 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="pedido")
+@Table(name = "pedido")
 public class Pedido {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ped_cd_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ped_cd_id")
 	private Integer id;
-	
-	@Column(name="ped_tx_numero")
+
+	@Column(name = "ped_tx_numero")
 	private String numero;
-	@Column(name="ped_int_assento")
-	private Integer assento;		
-	@Column(name="ped_int_quantidade")
-	private Integer quantidade;
-	@Column(name="ped_nb_valortotal")
+
+	@Column(name = "ped_nb_valortotal")
 	private Double valorTotal;
-	@Column(name="ped_tx_status")
+
+	@Column(name = "ped_tx_status")
 	private String status;
-	
-	@ManyToMany(fetch = FetchType.LAZY) 
+
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "pedido_produto", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
 	private Set<Produto> produtos = new HashSet<>();
-	
+
 	@ManyToOne
-	@JoinColumn(name="fk_cliente")
+	@JoinColumn(name = "fk_cliente")
 	private Cliente fkCliente;
-	
+
 	public Pedido() {
-	
 	}
 
-	public Pedido(Integer id, String numero, Integer assento, Integer quantidade, Double valorTotal, String status,
-			Set<Produto> produtos, Cliente fkCliente) {
+	public Pedido(Integer id, String numero, Double valorTotal, String status, Set<Produto> produtos,
+			Cliente fkCliente) {
+		super();
 		this.id = id;
 		this.numero = numero;
-		this.assento = assento;
-		this.quantidade = quantidade;
 		this.valorTotal = valorTotal;
 		this.status = status;
 		this.produtos = produtos;
 		this.fkCliente = fkCliente;
 	}
 
-	public Pedido(String numero, Integer assento, Integer quantidade, Double valorTotal, String status) {
+	public Pedido(String numero, Double valorTotal, String status) {
+		super();
 		this.numero = numero;
-		this.assento = assento;
-		this.quantidade = quantidade;
 		this.valorTotal = valorTotal;
 		this.status = status;
 	}
@@ -82,22 +77,6 @@ public class Pedido {
 		this.numero = numero;
 	}
 
-	public Integer getAssento() {
-		return assento;
-	}
-
-	public void setAssento(Integer assento) {
-		this.assento = assento;
-	}
-
-	public Integer getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
-	}
-
 	public Double getValorTotal() {
 		return valorTotal;
 	}
@@ -106,14 +85,6 @@ public class Pedido {
 		this.valorTotal = valorTotal;
 	}
 
-	public Cliente getFkCliente() {
-		return fkCliente;
-	}
-	
-	public void setFkCliente(Cliente fkCliente) {
-		this.fkCliente = fkCliente;
-	}
-	
 	public String getStatus() {
 		return status;
 	}
@@ -121,7 +92,7 @@ public class Pedido {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	public Set<Produto> getProdutos() {
 		return produtos;
 	}
@@ -130,7 +101,12 @@ public class Pedido {
 		this.produtos = produtos;
 	}
 
-//	public PedidoResponseDTO toResponseDTO() {
-//	    return new PedidoResponseDTO(this.numero, this.assento, this.quantidade, this.valorTotal, this.status, this.fkCliente.getNome(), this.getProdutos());
-//	}    
+	public Cliente getFkCliente() {
+		return fkCliente;
+	}
+
+	public void setFkCliente(Cliente fkCliente) {
+		this.fkCliente = fkCliente;
+	}
+
 }

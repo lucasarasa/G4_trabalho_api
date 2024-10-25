@@ -25,29 +25,33 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 @RestController
 @RequestMapping("/endereco")
 public class EnderecoController {
-	
+
 	@Autowired
 	EnderecoService enderecoService;
-	
-	@Autowired 
+
+	@Autowired
 	EnderecoRepository enderecoRepository;
-	
-	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
+
+//	@SecurityRequirement(name = "Bearer Auth")
+//	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/cadastrar-endereço")
 	@Operation(summary = "Cadastrar um novo endereço")
 	public String cadastrarEndereco(@RequestBody EnderecoRequestDTO enderecoRequestDTO) {
-		
+
 		Optional<Endereco> endereco = enderecoRepository.existsByCep(enderecoRequestDTO.getCep());
-		
-		if(endereco.isPresent()) {
-			return "Esse CEP já está cadastrado!";
+
+		if (enderecoRequestDTO.getCep().equals("20021-340")) {
+			return "Não é possível cadastrar um novo endereço do Rio de Janeiro.";
 		} else {
-			enderecoService.cadastrarEndereco(enderecoRequestDTO);
-			return "Endereço cadastrado com sucesso!";
+			if (endereco.isPresent()) {
+				return "Esse CEP já está cadastrado!";
+			} else {
+				enderecoService.cadastrarEndereco(enderecoRequestDTO);
+				return "Endereço cadastrado com sucesso!";
+			}
 		}
 	}
-	
+
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/buscar-todos")
@@ -55,20 +59,20 @@ public class EnderecoController {
 	public List<EnderecoResponseDTO> buscarTodos() {
 		return enderecoService.buscarTodos();
 	}
-	
+
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{id}")
 	@Operation(summary = "Buscar um endereço pelo ID")
-	public EnderecoResponseDTO buscarEndereco(@PathVariable Integer id) {	
+	public EnderecoResponseDTO buscarEndereco(@PathVariable Integer id) {
 		return enderecoService.buscarEndereco(id);
 	}
-	
+
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
 	@Operation(summary = "Atualizar um endereço")
-	public String atualizarEndereco(@PathVariable Integer id,@RequestBody EnderecoResponseDTO enderecoDTO) {
+	public String atualizarEndereco(@PathVariable Integer id, @RequestBody EnderecoResponseDTO enderecoDTO) {
 		return enderecoService.atualizarEndereco(id, enderecoDTO);
 	}
 
@@ -80,5 +84,5 @@ public class EnderecoController {
 		enderecoService.deletarEndereco(id);
 		return "Endereço deletado com sucesso!";
 	}
-	
+
 }

@@ -40,7 +40,7 @@ public class FuncionarioController {
 	
 //	@SecurityRequirement(name="Bearer Auth")
 //    @PreAuthorize("hasRole('ADMIN')")
-	@PostMapping("/inserir")
+	@PostMapping("/cadastrar-funcionario")
 	@Operation(summary = "Adicionar um novo funcionário")
 	public ResponseEntity<?> cadastrarFuncionario(@Valid @RequestPart FuncionarioRequestDTO funcionario, @RequestPart MultipartFile foto) throws IOException {
 		if (userRepository.existsByUsername(funcionario.getUsername())) {
@@ -64,7 +64,7 @@ public class FuncionarioController {
 	
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('ADMIN')")
-	@GetMapping
+	@GetMapping("/buscar-todos")
 	@Operation(summary = "Buscar todos os funcionários")
 	public List<FuncionarioResponseIdDTO> listarFuncionario() {
 		return funcionarioService.buscarTodos();

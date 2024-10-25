@@ -6,8 +6,6 @@ import br.com.trabalhofinal.grupoquatro.security.entities.Pedido;
 
 public class PedidoResponseDTO {
 	private String numero;
-	private Integer assento;		
-	private Integer quantidade;
 	private Double valorTotal;
 	private String status;
 	private String nomeCliente;
@@ -16,23 +14,19 @@ public class PedidoResponseDTO {
 	public PedidoResponseDTO() {
 	}
 	
-	public PedidoResponseDTO(String numero, Integer assento, Integer quantidade, Double valorTotal, String status,
+	public PedidoResponseDTO(String numero, Double valorTotal, String status,
 			String nomeCliente, Set<String> nomeProduto) {
 		super();
 		this.numero = numero;
-		this.assento = assento;
-		this.quantidade = quantidade;
 		this.valorTotal = valorTotal;
 		this.status = status;
 		this.nomeCliente = nomeCliente;
 		this.nomeProduto = nomeProduto;
 	}
 
-	public PedidoResponseDTO(String numero, Integer assento, Integer quantidade, Double valorTotal, String status,
+	public PedidoResponseDTO(String numero, Double valorTotal, String status,
 			String nomeCliente) {
 		this.numero = numero;
-		this.assento = assento;
-		this.quantidade = quantidade;
 		this.valorTotal = valorTotal;
 		this.status = status;
 		this.nomeCliente = nomeCliente;
@@ -43,18 +37,6 @@ public class PedidoResponseDTO {
 	}
 	public void setNumero(String numero) {
 		this.numero = numero;
-	}
-	public Integer getAssento() {
-		return assento;
-	}
-	public void setAssento(Integer assento) {
-		this.assento = assento;
-	}
-	public Integer getQuantidade() {
-		return quantidade;
-	}
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
 	}
 	public Double getValorTotal() {
 		return valorTotal;
@@ -83,6 +65,6 @@ public class PedidoResponseDTO {
 	}
 	
 	public Pedido toPedido() {
-		return new Pedido(this.numero, this.assento, this.quantidade, this.valorTotal, this.status);
+		return new Pedido(this.numero, this.valorTotal, this.status);
 	}
 }	

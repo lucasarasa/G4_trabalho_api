@@ -10,6 +10,7 @@ import br.com.trabalhofinal.grupoquatro.security.dto.CategoriaDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.MessageResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.entities.Categoria;
 import br.com.trabalhofinal.grupoquatro.security.services.CategoriaService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
@@ -21,7 +22,8 @@ public class CategoriaController {
 
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('ADMIN')")
-	@PostMapping("/create")
+	@PostMapping("/cadastrar-categoria")
+	@Operation(summary = "Cadastrar categoria")
 	public ResponseEntity<?> createCategoria(@RequestBody CategoriaDTO categoriaDTO) {
 		categoriaService.createCategoria(categoriaDTO);
 		return ResponseEntity.ok(new MessageResponseDTO("Categoria criada com sucesso!"));
@@ -29,15 +31,26 @@ public class CategoriaController {
 	
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/list")
+	@GetMapping("/buscar-todas")
+	@Operation(summary = "Buscar todos as categorias cadastradas")
     public ResponseEntity<List<Categoria>> listCategorias() {
         List<Categoria> categorias = categoriaService.listarCategorias();
         return ResponseEntity.ok(categorias);
     }
+	
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/{id}")
+	@Operation(summary = "Buscar uma categoria pelo ID")
+	public CategoriaDTO buscarCategoria(@PathVariable Integer id) {
+		return categoriaService.buscarCategoria(id);
+	}
+
 
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
+	@Operation(summary = "Atualizar categoria")
     public ResponseEntity<?> updateCategoria(@PathVariable Integer id, @RequestBody CategoriaDTO categoriaDTO) {
         categoriaService.updateCategoria(id, categoriaDTO);
         return ResponseEntity.ok(new MessageResponseDTO("Categoria atualizada com sucesso!"));
@@ -45,7 +58,8 @@ public class CategoriaController {
 
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
+	@Operation(summary = "Deletar categoria")
     public ResponseEntity<?> deleteCategoria(@PathVariable Integer id) {
         categoriaService.deleteCategoria(id);
         return ResponseEntity.ok(new MessageResponseDTO("Categoria deletada com sucesso!"));

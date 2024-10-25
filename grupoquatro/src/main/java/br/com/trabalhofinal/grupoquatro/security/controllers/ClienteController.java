@@ -53,7 +53,7 @@ public class ClienteController {
 	
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/listar")
+	@GetMapping("/buscar-todos")
 	@Operation(summary = "Listar todos os clientes")
 	public List<Cliente> listaCliente() {
 		return clienteService.clienteList();
@@ -61,7 +61,7 @@ public class ClienteController {
 	
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('USER')")
-	@DeleteMapping("/deleteId/{id}")
+	@DeleteMapping("/{id}")
 	@Operation(summary = "Deletar cliente por id")
 	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
 		boolean resultDelete = clienteService.clienteDelete(id);
@@ -80,7 +80,7 @@ public class ClienteController {
 		return clienteService.atualizarCliente(id, clienteDto);
 	}
 	
-	@PostMapping("/inserir")
+	@PostMapping("/cadastrar-cliente")
 	@Operation(summary = "Adicionar um novo cliente")
 	public ResponseEntity<?> cadastrarCliente(@Valid @RequestPart ClienteRequestDTO cliente, @RequestPart MultipartFile foto) throws IOException {
 		if (userRepository.existsByUsername(cliente.getUsername())) {
@@ -90,7 +90,7 @@ public class ClienteController {
 			return ResponseEntity.badRequest().body(new MessageResponseDTO("Erro: Email já utilizado!"));
 		}
 		clienteService.adicionarCliente(cliente, foto);
-		emailService.mailWriter(cliente);
+		emailService.mailWriterCliente(cliente);
 		return ResponseEntity.ok(new MessageResponseDTO("Usuário registrado com sucesso!"));
 	
 	}

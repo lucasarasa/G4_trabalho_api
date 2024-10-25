@@ -1,6 +1,7 @@
 package br.com.trabalhofinal.grupoquatro.security.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,16 @@ public class CategoriaService {
 	public List<Categoria> listarCategorias() {
         return categoriaRepository.findAll();
     }
+	
+	public CategoriaDTO buscarCategoria(Integer id) {
+
+		Optional<Categoria> categoria = categoriaRepository.findById(id);
+
+		CategoriaDTO categoriaDTO = new CategoriaDTO();
+		categoriaDTO.setTipo(categoria.get().getTipo());
+		categoriaDTO.setDescricao(categoria.get().getDescricao());
+		return categoriaDTO;
+	}
 
     public void updateCategoria(Integer id, CategoriaDTO categoriaDTO) {
         Categoria categoria = categoriaRepository.findById(id)

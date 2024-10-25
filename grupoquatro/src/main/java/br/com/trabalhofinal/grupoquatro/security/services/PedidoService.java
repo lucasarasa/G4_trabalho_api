@@ -29,35 +29,32 @@ public class PedidoService {
 	@Autowired
 	ProdutoRepository produtoRepository;
 
-	public Pedido adicionarPedido(Pedido pedido) {
-		return pedidoRepository.save(pedido);
-	}
-
 	public PedidoResponseDTO adicionarPedido(PedidoRequestDTO pedidoDto) {
 		PedidoResponseDTO pedido = new PedidoResponseDTO();
 		pedido.setNumero(pedidoDto.getNumero());
-		pedido.setAssento(pedidoDto.getAssento());
-		pedido.setQuantidade(pedidoDto.getQuantidade());
-		pedido.setValorTotal(pedidoDto.getValorTotal());
-		pedido.setStatus(pedidoDto.getStatus());
+		pedido.setStatus("Em processamento");
 
 		Set<String> nomesProdutos = new HashSet<>();
 		Set<Produto> produtos = produtoRepository.retornaLista(pedidoDto.getIdProduto());
 		for (Produto prod : produtos) {
 			nomesProdutos.add(prod.getNome());
 		}
-		
+
 		pedido.setNomeProduto(nomesProdutos);
-		
+
+		Double valorTotal = produtos.stream().mapToDouble(Produto::getPreco).sum();
+
+		pedido.setValorTotal(valorTotal);
+
 		Pedido pedidoConvert = pedido.toPedido();
 		pedidoConvert.setProdutos(produtos);
-		
+
 		Cliente cliente = clienteRepository.buscarCliente(pedidoDto.getIdCliente());
 		pedidoConvert.setFkCliente(cliente);
 		pedido.setNomeCliente(cliente.getNome());
-		
+
 		pedidoRepository.save(pedidoConvert);
-		
+
 		return pedido;
 	}
 
@@ -71,9 +68,9 @@ public class PedidoService {
 		for (Produto prod : produtos) {
 			nomesProdutos.add(prod.getNome());
 		}
-		
-		return new PedidoResponseDTO(pedido.get().getNumero(), pedido.get().getAssento(), pedido.get().getQuantidade(),
-			pedido.get().getValorTotal(), pedido.get().getStatus(), cliente.get().getNome(), nomesProdutos);
+
+		return new PedidoResponseDTO(pedido.get().getNumero(), pedido.get().getValorTotal(), pedido.get().getStatus(),
+				cliente.get().getNome(), nomesProdutos);
 	}
 
 	public boolean pedidoDelete(Integer id) {
@@ -85,13 +82,10 @@ public class PedidoService {
 		}
 	}
 
-	public String atualizarPedido(Integer id, PedidoRequestUpdateDTO pedidoDto) {
-		if (!pedidoRepository.existsById(id)) {
-			return "Pedido não existe!";
-		}
+	public void atualizarPedido(Integer id, PedidoRequestUpdateDTO pedidoDto) {
 		Pedido pedidoTodo = pedidoRepository.findById(id).get();
 		pedidoTodo.setStatus(pedidoDto.getStatus());
-		pedidoRepository.save(pedidoTodo);
-		return "Pedido modificado com sucesso!";
+		pedidoRepository.save(pedidoTodo);	
 	}
+	
 }

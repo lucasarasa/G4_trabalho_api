@@ -38,8 +38,8 @@ public class ProdutoController {
 	@Autowired
 	AeroportoRepository aeroportoRepository;
 
-//	@SecurityRequirement(name = "Bearer Auth")
-//	@PreAuthorize("hasRole('ADMIN')")
+	@SecurityRequirement(name = "Bearer Auth")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/cadastrar-produto")
 	@Operation(summary = "Cadastrar um novo produto")
 

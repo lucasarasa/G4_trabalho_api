@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.trabalhofinal.grupoquatro.security.dto.PedidoRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.PedidoRequestUpdateDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.PedidoResponseDTO;
+import br.com.trabalhofinal.grupoquatro.security.repositories.PedidoRepository;
 import br.com.trabalhofinal.grupoquatro.security.services.EmailService;
 import br.com.trabalhofinal.grupoquatro.security.services.PedidoService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
@@ -30,9 +32,13 @@ public class PedidoController {
 	@Autowired
 	PedidoService pedidoService;
 	
+	@Autowired
+	PedidoRepository pedidoRepository;
+	
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('USER')")
-	@PostMapping
+	@PostMapping("/cadastrar-pedido")
+	@Operation(summary = "Cadastrar um novo pedido")
 	public PedidoResponseDTO adicionarPedido(@RequestBody PedidoRequestDTO pedidoDto) {
 		emailService.mailWriterPedido(pedidoDto);
 		return pedidoService.adicionarPedido(pedidoDto);
@@ -41,13 +47,15 @@ public class PedidoController {
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('USER')")
 	@GetMapping("/{id}")
+	@Operation(summary = "Buscar um pedido por ID")
 	public PedidoResponseDTO buscarPorId(@PathVariable Integer id) {
 		return pedidoService.buscarPedido(id);
 	}
 	
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('ADMIN')")
-	@DeleteMapping("/deleteId/{id}")
+	@DeleteMapping("/{id}")
+	@Operation(summary = "Deletar um pedido")
 	public ResponseEntity<String> deletarId(@PathVariable Integer id) {
 		boolean resultDelete = pedidoService.pedidoDelete(id);
 		if(resultDelete) {
@@ -60,7 +68,13 @@ public class PedidoController {
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
+	@Operation(summary = "Atualizar o status de um pedido")
 	public String atualizarPedido(@PathVariable Integer id,@RequestBody PedidoRequestUpdateDTO pedidoDto) {
-		return pedidoService.atualizarPedido(id, pedidoDto);
+		if (!pedidoRepository.existsById(id)) {
+			return "Pedido não existe!";
+		}
+		pedidoService.atualizarPedido(id, pedidoDto);
+		emailService.mailWriterAtualizacaoStatus(id);
+		return "Pedido modificado com sucesso!";
 	}
 }
