@@ -1,7 +1,6 @@
 package br.com.trabalhofinal.grupoquatro.security.entities;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoResponseDTO;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +29,7 @@ public class Produto {
 	@Column(name="pro_nb_preco")
 	private Double preco;
 	
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne
 	@JoinColumn(unique = true, name = "fk_endereco")
 	private Endereco fkEndereco;
 	

@@ -17,10 +17,12 @@ import br.com.trabalhofinal.grupoquatro.security.dto.FuncionarioRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.FuncionarioRequestUpdateDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.FuncionarioResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.FuncionarioResponseIdDTO;
+import br.com.trabalhofinal.grupoquatro.security.entities.Aeroporto;
 import br.com.trabalhofinal.grupoquatro.security.entities.Funcionario;
 import br.com.trabalhofinal.grupoquatro.security.entities.Role;
 import br.com.trabalhofinal.grupoquatro.security.entities.User;
 import br.com.trabalhofinal.grupoquatro.security.enums.RoleEnum;
+import br.com.trabalhofinal.grupoquatro.security.repositories.AeroportoRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.FuncionarioRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.RoleRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.UserRepository;
@@ -38,6 +40,8 @@ public class FuncionarioService {
 	UserRepository userRepository;
 	@Autowired
 	FotoService fotoService;
+	@Autowired
+	AeroportoRepository aeroportoRepository;
 	
 	public FuncionarioResponseDTO cadastrarFuncionario(FuncionarioRequestDTO funcionario, @RequestPart MultipartFile foto) throws IOException {
 		FuncionarioResponseDTO newFuncionario = new FuncionarioResponseDTO();
@@ -81,6 +85,8 @@ public class FuncionarioService {
 			});
 		}
 		usuario.setRoles(roles);
+		Aeroporto aeroporto = aeroportoRepository.buscarAeroporto();
+		usuario.setFkAeroporto(aeroporto);
 		userRepository.save(usuario);
 		fotoService.cadastrarFoto(foto, usuario);
 		

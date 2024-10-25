@@ -104,4 +104,29 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public Cliente getFkCliente() {
+		return fkCliente;
+	}
+
+	public void setFkCliente(Cliente fkCliente) {
+		this.fkCliente = fkCliente;
+	}
+
+	public Funcionario getFkFuncionario() {
+		return fkFuncionario;
+	}
+
+	public void setFkFuncionario(Funcionario fkFuncionario) {
+		this.fkFuncionario = fkFuncionario;
+	}
+
+	public Aeroporto getFkAeroporto() {
+		return fkAeroporto;
+	}
+
+	public void setFkAeroporto(Aeroporto fkAeroporto) {
+		this.fkAeroporto = fkAeroporto;
+	}
+	
 }

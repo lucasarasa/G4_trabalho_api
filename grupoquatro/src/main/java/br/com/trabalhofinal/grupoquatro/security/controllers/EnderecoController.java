@@ -27,7 +27,7 @@ public class EnderecoController {
 	EnderecoService enderecoService;
 	
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/cadastrar-endereço")
 	@Operation(summary = "Cadastrar um novo endereço")
 	public EnderecoResponseDTO cadastrarEndereco(@RequestBody EnderecoRequestDTO enderecoRequestDTO) {
@@ -35,7 +35,7 @@ public class EnderecoController {
 	}
 	
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/buscar-todos")
 	@Operation(summary = "Buscar todos os endereços cadastrados")
 	public List<EnderecoResponseDTO> buscarTodos() {
@@ -43,7 +43,7 @@ public class EnderecoController {
 	}
 	
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/{id}")
 	@Operation(summary = "Buscar um endereço pelo ID")
 	public EnderecoResponseDTO buscarEndereco(@PathVariable Integer id) {	
@@ -51,7 +51,7 @@ public class EnderecoController {
 	}
 	
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
 	@Operation(summary = "Atualizar um endereço")
 	public String atualizarEndereco(@PathVariable Integer id,@RequestBody EnderecoResponseDTO enderecoDTO) {
@@ -59,7 +59,7 @@ public class EnderecoController {
 	}
 
 	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
 	@Operation(summary = "Deletar um endereço pelo ID")
 	public String deletarEndereco(@PathVariable Integer id) {

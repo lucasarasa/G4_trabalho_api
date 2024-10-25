@@ -14,10 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.ClienteRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ClienteResponseDTO;
+import br.com.trabalhofinal.grupoquatro.security.entities.Aeroporto;
 import br.com.trabalhofinal.grupoquatro.security.entities.Cliente;
 import br.com.trabalhofinal.grupoquatro.security.entities.Role;
 import br.com.trabalhofinal.grupoquatro.security.entities.User;
 import br.com.trabalhofinal.grupoquatro.security.enums.RoleEnum;
+import br.com.trabalhofinal.grupoquatro.security.repositories.AeroportoRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.ClienteRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.RoleRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.UserRepository;
@@ -39,6 +41,9 @@ public class ClienteService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	AeroportoRepository aeroportoRepository;
 
 	public Cliente adicionarCliente(Cliente cliente) {
 		return clienteRepository.save(cliente);
@@ -86,6 +91,8 @@ public class ClienteService {
 			});
 		}
 		usuario.setRoles(roles);
+		Aeroporto aeroporto = aeroportoRepository.buscarAeroporto();
+		usuario.setFkAeroporto(aeroporto);
 
 		userRepository.save(usuario);
 		fotoService.cadastrarFoto(foto, usuario);

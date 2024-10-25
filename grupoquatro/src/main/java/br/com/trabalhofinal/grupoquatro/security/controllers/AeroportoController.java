@@ -40,9 +40,9 @@ public class AeroportoController {
 	public List<AeroportoRequestDTO> listarAeroporto(){
 		return aeroportoService.listarAeroporto();
 	}
-	
-	@SecurityRequirement(name = "Bearer Auth")
-	@PreAuthorize("hasRole('ADMIN')")
+//	
+//	@SecurityRequirement(name = "Bearer Auth")
+//	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping
 	@Operation(summary = "Cadastrar aeroporto.")
 	public ResponseEntity<?> cadastrarAeroporto(@RequestBody AeroportoRequestDTO aeroportoRequestDTO){

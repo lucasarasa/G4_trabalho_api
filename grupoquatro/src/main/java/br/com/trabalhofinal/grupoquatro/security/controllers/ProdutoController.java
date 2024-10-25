@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoRequestUpdateDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoResponseDTO;
+import br.com.trabalhofinal.grupoquatro.security.entities.Aeroporto;
 import br.com.trabalhofinal.grupoquatro.security.entities.Endereco;
+import br.com.trabalhofinal.grupoquatro.security.repositories.AeroportoRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.EnderecoRepository;
 import br.com.trabalhofinal.grupoquatro.security.services.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,12 +35,15 @@ public class ProdutoController {
 
 	@Autowired
 	EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	AeroportoRepository aeroportoRepository;
 
 	@SecurityRequirement(name = "Bearer Auth")
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/cadastrar-produto")
 	@Operation(summary = "Cadastrar um novo produto")
-	public String cadastrarProduto(@RequestBody ProdutoRequestDTO produtoDTO) {
+	public String cadastrarProduto(@RequestBody ProdutoRequestDTO produtoDTO, @RequestBody Aeroporto aeroporto) {
 		Optional<Endereco> endereco = enderecoRepository.existsByCep(produtoDTO.getCepDestino());
 
 		if (endereco.isPresent()) {

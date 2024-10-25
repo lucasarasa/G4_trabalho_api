@@ -18,4 +18,5 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
 	@Query(value="select * from Endereco limit 1", nativeQuery =true)
 	public Endereco buscarEnderecoUnico();
 	
+	
 }
