@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoRequestDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoRequestUpdateDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.ProdutoResponseDTO;
-import br.com.trabalhofinal.grupoquatro.security.entities.Aeroporto;
 import br.com.trabalhofinal.grupoquatro.security.entities.Endereco;
 import br.com.trabalhofinal.grupoquatro.security.repositories.AeroportoRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.EnderecoRepository;

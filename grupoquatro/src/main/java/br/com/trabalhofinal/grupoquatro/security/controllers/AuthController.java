@@ -1,9 +1,6 @@
 package br.com.trabalhofinal.grupoquatro.security.controllers;
 
-import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.JwtResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.LoginRequestDTO;
-import br.com.trabalhofinal.grupoquatro.security.dto.MessageResponseDTO;
-import br.com.trabalhofinal.grupoquatro.security.dto.SignupRequestDTO;
-import br.com.trabalhofinal.grupoquatro.security.entities.Role;
-import br.com.trabalhofinal.grupoquatro.security.entities.User;
-import br.com.trabalhofinal.grupoquatro.security.enums.RoleEnum;
 import br.com.trabalhofinal.grupoquatro.security.jwt.JwtUtils;
 import br.com.trabalhofinal.grupoquatro.security.repositories.RoleRepository;
 import br.com.trabalhofinal.grupoquatro.security.repositories.UserRepository;
@@ -126,6 +116,7 @@ public class AuthController {
 //
 //		return ResponseEntity.ok(new MessageResponseDTO("Usuário registrado com sucesso!"));
 //	}
+	
 	@GetMapping("/{id}/foto")
 	public ResponseEntity<byte[]> getFoto(@PathVariable Integer id) throws Exception {
 		byte[] foto = fotoService.getFoto(id);
