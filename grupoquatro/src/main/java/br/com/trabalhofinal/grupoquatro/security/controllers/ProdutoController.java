@@ -46,7 +46,7 @@ public class ProdutoController {
 	public String cadastrarProduto(@RequestBody ProdutoRequestDTO produtoDTO) {
 		Optional<Endereco> endereco = enderecoRepository.existsByCep(produtoDTO.getCepDestino());
 
-		if (endereco.get().getId() != (1)) {
+		if (!produtoDTO.getCepDestino().equals("21941-900")) {
 			if (endereco.isPresent()) {
 				produtoService.cadastrarProduto(produtoDTO);
 				return "Produto cadastrado com sucesso!";
