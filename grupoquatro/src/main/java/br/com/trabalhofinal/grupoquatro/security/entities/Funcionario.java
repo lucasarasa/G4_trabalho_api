@@ -40,7 +40,7 @@ public class Funcionario {
 	@JoinTable(name = "func_prod", joinColumns = @JoinColumn(name = "func_id"), inverseJoinColumns = @JoinColumn(name = "prod_id"))
 	private Set<Produto> produtos = new HashSet<>();
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(unique=true, name = "fkUser")
 	private User fkUser;
 	

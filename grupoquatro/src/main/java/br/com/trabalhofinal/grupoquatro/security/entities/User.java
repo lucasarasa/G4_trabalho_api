@@ -3,6 +3,7 @@ package br.com.trabalhofinal.grupoquatro.security.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -55,6 +56,9 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name="fk_aeroporto")
 	private Aeroporto fkAeroporto;
+	
+	@OneToOne(mappedBy= "fkUser", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Foto fkFoto;
 
 	public User() {
 	}

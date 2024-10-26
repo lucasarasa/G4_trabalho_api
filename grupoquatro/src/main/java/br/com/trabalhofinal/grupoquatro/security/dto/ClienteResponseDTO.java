@@ -11,6 +11,20 @@ private String nome;
 	private String cartao; 
 	private LocalDate dataNascimento; 
 	private String telefone;
+	
+
+	public ClienteResponseDTO() {
+	}
+	
+	public ClienteResponseDTO(String nome, String cpf, String cartao, LocalDate dataNascimento, String telefone) {
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		this.cartao = cartao;
+		this.dataNascimento = dataNascimento;
+		this.telefone = telefone;
+	}
+
 	public String getNome() {
 		return nome;
 	}

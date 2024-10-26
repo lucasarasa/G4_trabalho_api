@@ -25,7 +25,7 @@ public class FotoService {
 		fotoUsuario.setTipo(foto.getContentType());
 		fotoUsuario.setNome(foto.getOriginalFilename());
 		fotoUsuario.setUrl(adicionarImagemUri(user));
-		fotoUsuario.setUser(user);
+		fotoUsuario.setFkUser(user);
 		
 		return fotoRepository.save(fotoUsuario);
 		

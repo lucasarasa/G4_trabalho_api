@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -103,8 +104,17 @@ public class ClienteService {
 		return cliente;
 	}
 
-	public Optional<Cliente> buscarPorId(Integer id) {
-		return clienteRepository.findById(id);
+	public ClienteResponseDTO buscarPorId(Integer id) {
+
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		ClienteResponseDTO clienteResponseDTO = new ClienteResponseDTO();
+		clienteResponseDTO.setNome(cliente.get().getNome());
+		clienteResponseDTO.setCpf(cliente.get().getCpf());
+		clienteResponseDTO.setTelefone(cliente.get().getTelefone());
+		clienteResponseDTO.setDataNascimento(cliente.get().getDataNascimento());
+		clienteResponseDTO.setCartao(cliente.get().getCartao());
+
+		return clienteResponseDTO;
 	}
 
 	public boolean clienteDelete(Integer id) {
@@ -141,8 +151,13 @@ public class ClienteService {
 		return "Cliente atualizado com sucesso!";
 	}
 
-	public List<Cliente> clienteList() {
-		return clienteRepository.findAll();
+	public List<ClienteResponseDTO> clienteList() {
+		List<Cliente> clientes = clienteRepository.findAll();
+		return clientes.stream().map(cliente -> new ClienteResponseDTO(cliente.getNome(),
+				cliente.getCpf(),
+				cliente.getCartao(),
+				cliente.getDataNascimento(),
+				cliente.getTelefone())).collect(Collectors.toList());
 	}
 
 }

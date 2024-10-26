@@ -2,7 +2,6 @@ package br.com.trabalhofinal.grupoquatro.security.controllers;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.trabalhofinal.grupoquatro.security.dto.ClienteRequestDTO;
+import br.com.trabalhofinal.grupoquatro.security.dto.ClienteResponseDTO;
 import br.com.trabalhofinal.grupoquatro.security.dto.MessageResponseDTO;
-import br.com.trabalhofinal.grupoquatro.security.entities.Cliente;
 import br.com.trabalhofinal.grupoquatro.security.repositories.UserRepository;
 import br.com.trabalhofinal.grupoquatro.security.services.ClienteService;
 import br.com.trabalhofinal.grupoquatro.security.services.EmailService;
@@ -47,15 +46,15 @@ public class ClienteController {
     @PreAuthorize("hasRole('USER')")
 	@GetMapping("/{id}")
 	@Operation(summary = "Buscas cliente por id")
-	public Optional<Cliente> buscarPorId(@PathVariable Integer id) {
-		return clienteService.buscarPorId(id);
+	public ClienteResponseDTO buscarCliente(@PathVariable Integer id) {
+	return clienteService.buscarPorId(id);
 	}
 	
 	@SecurityRequirement(name="Bearer Auth")
     @PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/buscar-todos")
 	@Operation(summary = "Listar todos os clientes")
-	public List<Cliente> listaCliente() {
+	public List<ClienteResponseDTO> listarCliente() {
 		return clienteService.clienteList();
 	}
 	

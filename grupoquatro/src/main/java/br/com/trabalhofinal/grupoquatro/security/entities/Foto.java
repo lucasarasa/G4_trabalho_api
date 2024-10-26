@@ -30,19 +30,19 @@ public class Foto {
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "usuario_id")
-	private User user;
+	private User fkUser;
 
 	public Foto() {
 	}
 
-	public Foto(Integer id, String tipo, String nome, byte[] dados, User user, String url) {
+	public Foto(Integer id, String tipo, String nome, byte[] dados, String url, User fkUser) {
 		super();
 		this.id = id;
 		this.tipo = tipo;
 		this.nome = nome;
 		this.dados = dados;
-		this.user = user;
 		this.url = url;
+		this.fkUser = fkUser;
 	}
 
 	public Integer getId() {
@@ -77,12 +77,12 @@ public class Foto {
 		this.dados = dados;
 	}
 
-	public User getUser() {
-		return user;
+	public User getFkUser() {
+		return fkUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setFkUser(User fkUser) {
+		this.fkUser = fkUser;
 	}
 
 	public String getUrl() {
