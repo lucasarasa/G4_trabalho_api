@@ -56,5 +56,5 @@ O projeto foi desenvolvido com as seguintes dependências principais:
 - [Bruna Coelho](https://github.com/brunacmedeiros)
 - [Diogo Portella](https://github.com/Dgporte)
 - [Gabriel Couto](https://github.com/Yzmael14)
-- [João Gabriel Wermelinger:](https://github.com/joaocfw)
+- [João Gabriel Wermelinger](https://github.com/joaocfw)
 - [Lucas Sarasa](https://github.com/lucasarasa)
